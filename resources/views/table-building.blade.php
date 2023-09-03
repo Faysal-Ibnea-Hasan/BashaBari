@@ -1,0 +1,5 @@
+@include('layouts.nav-bar')
+@include('layouts.side-bar')
+@include('layouts.building-table')
+@include('layouts.footer')
+
