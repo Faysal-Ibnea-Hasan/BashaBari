@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\BuildingController;
+use App\Http\Controllers\FlatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,19 @@ Route::controller(BuildingController::class)->group(function () {
                              //===Update===
     Route::get('Building/Update/{id}','GetBuildingUpdateForm')->name('building.form.update');
     Route::put('Building/Updated/{id}','UpdateBuilding')->name('building.form.update.put');
+});
+//===================================FLAT CONTROLLER================================================
+Route::controller(FlatController::class)->group(function () {
+                             //===Create===
+    Route::get('Flat/Create_Form','GetFlatForm')->name('flat.form.create');
+    Route::post('Flat/Create_Form_Post','CreateFlat')->name('flat.form.post');
+                             //===View===
+    Route::get('Flat/Table','GetFlatList')->name('flat.table');
+                             //===Delete===
+    Route::get('DeleteFlat/{id}','DeleteFlat')->name('flat.delete');
+                             //===Update===
+    Route::get('Flat/Update/{id}','GetFlatUpdateForm')->name('flat.form.update');
+    Route::put('Flat/Updated/{id}','UpdateFlat')->name('flat.form.update.put');
 });
 
 
