@@ -69,13 +69,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link active">
+                <a href="{{Route('tenant.form.create')}}" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Tenant</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="{{Route('tenant.table')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tenant List</p>
                 </a>

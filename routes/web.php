@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\FlatController;
+use App\Http\Controllers\TenantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +63,19 @@ Route::controller(FlatController::class)->group(function () {
                              //===Update===
     Route::get('Flat/Update/{id}','GetFlatUpdateForm')->name('flat.form.update');
     Route::put('Flat/Updated/{id}','UpdateFlat')->name('flat.form.update.put');
+});
+//===================================TENANT CONTROLLER================================================
+Route::controller(TenantController::class)->group(function () {
+                             //===Create===
+    Route::get('Tenant/Create_Form','GetTenantForm')->name('tenant.form.create');
+    Route::post('Tenant/Create_Form_Post','CreateTenant')->name('tenant.form.post');
+                             //===View===
+    Route::get('Tenant/Table','GetTenantList')->name('tenant.table');
+                             //===Delete===
+    Route::get('DeleteTenant/{id}','DeleteTenant')->name('tenant.delete');
+                             //===Update===
+    Route::get('Tenant/Update/{id}','GetTenantUpdateForm')->name('tenant.form.update');
+    Route::put('Tenant/Updated/{id}','UpdateTenant')->name('tenant.form.update.put');
 });
 
 
