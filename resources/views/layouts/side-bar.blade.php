@@ -169,13 +169,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link active">
+                <a href="{{Route('own.form.create')}}" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Assign Owner</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="{{Route('own.table')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Assigned Details</p>
                 </a>

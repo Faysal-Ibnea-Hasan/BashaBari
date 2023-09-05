@@ -6,6 +6,7 @@ use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\FlatController;
 use App\Http\Controllers\TenantController;
+use App\Http\Controllers\OwnController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,19 @@ Route::controller(TenantController::class)->group(function () {
                              //===Update===
     Route::get('Tenant/Update/{id}','GetTenantUpdateForm')->name('tenant.form.update');
     Route::put('Tenant/Updated/{id}','UpdateTenant')->name('tenant.form.update.put');
+});
+//===================================OWN CONTROLLER================================================
+Route::controller(OwnController::class)->group(function () {
+                             //===Create===
+    Route::get('Own/Create_Form','GetOwnForm')->name('own.form.create');
+    Route::post('Own/Create_Form_Post','CreateOwn')->name('own.form.post');
+                             //===View===
+    Route::get('Own/Table','GetOwnList')->name('own.table');
+                             //===Delete===
+    Route::get('DeleteOwn/{id}','DeleteOwn')->name('own.delete');
+                             //===Update===
+    Route::get('Own/Update/{id}','GetOwnUpdateForm')->name('own.form.update');
+    Route::put('Own/Updated/{id}','UpdateOwn')->name('own.form.update.put');
 });
 
 
