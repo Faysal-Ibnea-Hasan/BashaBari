@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tenant|Table</title>
+  <title>Rental|Table</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -33,7 +33,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Tenant's Table</h1>
+            <h1>Rental Table</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -55,7 +55,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Tenant's Details</h3>
+                <h3 class="card-title">Rental Details</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -63,33 +63,31 @@
                   <thead>
                   <tr>
                     <th>S.N</th>
-                    <th>Tenant's Name</th>
-                    <th>Mobile Number</th>
-                    <th>Address</th>
-                    <th>Password</th>
-                    <th>NID</th>
-                    
-                    <th>Image</th>
+                    <th>Building Name</th>
+                    <th>Unit Name</th>
+                    <th>Rental ID</th>
+                    <th>Status</th>
                     <th colspan="2">Action</th>
+                    
+                    
                     
                     
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach ($data as $key=> $tenants)
+                    @foreach ($data as $key=> $rentals)
                         
                     <tr>
                       <td>{{$key+1}}</td>
-                      <td>{{$tenants->name}}</td>
-                      <td>{{$tenants->mobile}}</td>
-                      <td>{{$tenants->address}}</td>
-                      <td>{{$tenants->password}}</td>
-                      <td>{{$tenants->nid}}</td>
+                      <td>{{$rentals->Flats->Buildings->name}}</td>
+                      <td>{{$rentals->Flats->unit_name}}</td>
+                      <td>{{$rentals->rental_Id}}</td>
+                      <td>{{$rentals->status}}</td>
                       
-                      <td>{{$tenants->image}}</td>
                       
-                      <td><a href="{{Route("tenant.form.update",['id' => $tenants->id])}}"><button type="button" class="btn btn-block btn-primary">Update</button></a></td>
-                      <td><a href="{{Route("tenant.delete",['id' => $tenants->id])}}"><button type="button" class="btn btn-block btn-danger">Delete</button></a></td>
+                      
+                      <td><a href="{{Route("rental.form.update",['id' => $rentals->id])}}"><button type="button" class="btn btn-block btn-primary">Update</button></a></td>
+                      <td><a href="{{Route("rental.delete",['id' => $rentals->id])}}"><button type="button" class="btn btn-block btn-danger">Delete</button></a></td>
                     </tr>
                     @endforeach
                   
@@ -154,16 +152,16 @@
 <script>
   $(function () {
     $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "responsive": true, "lengthChange": true, "autoWidth": true,
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,
-      "lengthChange": false,
-      "searching": false,
+      "lengthChange": true,
+      "searching": true,
       "ordering": true,
       "info": true,
-      "autoWidth": false,
+      "autoWidth": true,
       "responsive": true,
     });
   });

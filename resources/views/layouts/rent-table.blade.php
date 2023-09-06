@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tenant|Table</title>
+  <title>Rent|Table</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -33,7 +33,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Tenant's Table</h1>
+            <h1>Rent Table</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -55,7 +55,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Tenant's Details</h3>
+                <h3 class="card-title">Rent Details</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -64,32 +64,28 @@
                   <tr>
                     <th>S.N</th>
                     <th>Tenant's Name</th>
-                    <th>Mobile Number</th>
-                    <th>Address</th>
-                    <th>Password</th>
-                    <th>NID</th>
-                    
-                    <th>Image</th>
+                    <th>Unit Name</th>
+                    <th>Building Name</th>
                     <th colspan="2">Action</th>
+                    
+                    
                     
                     
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach ($data as $key=> $tenants)
+                    @foreach ($data as $key=> $rents)
                         
                     <tr>
                       <td>{{$key+1}}</td>
-                      <td>{{$tenants->name}}</td>
-                      <td>{{$tenants->mobile}}</td>
-                      <td>{{$tenants->address}}</td>
-                      <td>{{$tenants->password}}</td>
-                      <td>{{$tenants->nid}}</td>
+                      <td>{{$rents->Tenants->name}}</td>
+                      <td>{{$rents->Flats->unit_name}}</td>
+                      <td>{{$rents->Flats->Buildings->name}}</td>
                       
-                      <td>{{$tenants->image}}</td>
                       
-                      <td><a href="{{Route("tenant.form.update",['id' => $tenants->id])}}"><button type="button" class="btn btn-block btn-primary">Update</button></a></td>
-                      <td><a href="{{Route("tenant.delete",['id' => $tenants->id])}}"><button type="button" class="btn btn-block btn-danger">Delete</button></a></td>
+                      
+                      <td><a href="{{Route("rent.form.update",['id' => $rents->id])}}"><button type="button" class="btn btn-block btn-primary">Update</button></a></td>
+                      <td><a href="{{Route("rent.delete",['id' => $rents->id])}}"><button type="button" class="btn btn-block btn-danger">Delete</button></a></td>
                     </tr>
                     @endforeach
                   

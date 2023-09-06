@@ -37,7 +37,7 @@
                   <label for="exampleInputPassword1">Owner's Name</label>
                   <select class="form-control" name="owner_Id" id="owner_Id">
                     
-                    <option name="owner_Id" value="owner_Id" >Select</option>
+                    {{-- <option name="owner_Id" value="owner_Id" >Select</option> --}}
                     @foreach ($dataOwners as $key=>$data)
                     <option name="owner_Id" value="{{ $data->id }}" >{{ $data->name }}</option>
           
@@ -48,7 +48,7 @@
                   <label for="exampleInputPassword1">Unit Name</label>
                   <select class="form-control" name="flat_Id" id="flat_Id">
                     
-                    <option name="flat_Id" value="flat_Id" >Select</option>
+                    {{-- <option name="flat_Id" value="flat_Id" >Select</option> --}}
                     @foreach ($dataFlats as $key=>$data)
                     <option name="flat_Id" value="{{ $data->flat_Id }}" >{{ $data->unit_name }}</option>
           

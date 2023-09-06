@@ -7,6 +7,8 @@ use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\FlatController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\OwnController;
+use App\Http\Controllers\RentController;
+use App\Http\Controllers\RentalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +92,32 @@ Route::controller(OwnController::class)->group(function () {
                              //===Update===
     Route::get('Own/Update/{id}','GetOwnUpdateForm')->name('own.form.update');
     Route::put('Own/Updated/{id}','UpdateOwn')->name('own.form.update.put');
+});
+//===================================RENT CONTROLLER================================================
+Route::controller(RentController::class)->group(function () {
+                             //===Create===
+    Route::get('Rent/Create_Form','GetRentForm')->name('rent.form.create');
+    Route::post('Rent/Create_Form_Post','CreateRent')->name('rent.form.post');
+                             //===View===
+    Route::get('Rent/Table','GetRentList')->name('rent.table');
+                             //===Delete===
+    Route::get('DeleteRent/{id}','DeleteRent')->name('rent.delete');
+                             //===Update===
+    Route::get('Rent/Update/{id}','GetRentUpdateForm')->name('rent.form.update');
+    Route::put('Rent/Updated/{id}','UpdateRent')->name('rent.form.update.put');
+});
+//===================================RENTAL CONTROLLER================================================
+Route::controller(RentalController::class)->group(function () {
+                             //===Create===
+    Route::get('Rental/Create_Form','GetRentalForm')->name('rental.form.create');
+    Route::post('Rental/Create_Form_Post','CreateRental')->name('rental.form.post');
+                             //===View===
+    Route::get('Rental/Table','GetRentalList')->name('rental.table');
+                             //===Delete===
+    Route::get('DeleteRental/{id}','DeleteRental')->name('rental.delete');
+                             //===Update===
+    Route::get('Rental/Update/{id}','GetRentalUpdateForm')->name('rental.form.update');
+    Route::put('Rental/Updated/{id}','UpdateRental')->name('rental.form.update.put');
 });
 
 

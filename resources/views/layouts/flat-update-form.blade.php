@@ -65,7 +65,7 @@
                     <label for="exampleInputPassword1">Building Name</label>
                     <select class="form-control" name="building_Id" id="building_Id">
                       
-                      <option name="building_Id" value="building_Id" >Select</option>
+                      {{-- <option name="building_Id" value="building_Id" >Select</option> --}}
                       @foreach ($dataBuilding as $key=>$data)
                       <option name="building_Id" value="{{ $data->building_Id }}" >{{ $data->name }}</option>
             

@@ -144,13 +144,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link active">
+                <a href="{{Route('rent.form.create')}}" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Rent Details</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="{{Route('rent.table')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Rent Details</p>
                 </a>
@@ -194,13 +194,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link active">
+                <a href="{{Route('rental.form.create')}}" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Rental Details</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="{{Route('rental.table')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Rental Details</p>
                 </a>
