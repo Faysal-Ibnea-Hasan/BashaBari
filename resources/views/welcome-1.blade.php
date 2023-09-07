@@ -8,6 +8,7 @@
     @include('layouts.essential')
 </head>
 <body>
+    
     @include('layouts.nav-bar')
     
     @include('layouts.side-bar')

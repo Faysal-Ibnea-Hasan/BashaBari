@@ -8,7 +8,7 @@ class DashboardController extends Controller
 {
     public function GetDashboard()
     {
-        return view('welcome');
+        return view('welcome-1');
     }
 
 }

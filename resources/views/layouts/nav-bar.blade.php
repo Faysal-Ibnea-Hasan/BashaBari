@@ -133,5 +133,18 @@
           <i class="fas fa-th-large"></i>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link"  href="{{Route('logout')}}">
+          logout
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{Route('profile.edit')}}">{{ Auth::user()->name }}</a>
+      </li>
+
+      
+
+        
+      
     </ul>
   </nav>
