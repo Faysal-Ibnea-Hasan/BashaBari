@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tenants;
+use Illuminate\Support\Facades\File;
 
 class TenantController extends Controller
 {
@@ -28,7 +29,19 @@ class TenantController extends Controller
        $tenant->address = $request->address;
        $tenant->password = $request->password;
        $tenant->nid = $request->nid;
-       $tenant->image = $request->image;
+    //    $tenant->image = $request->image;
+    if($request->hasfile('image'))
+    {
+       $file = $request->file('image');
+       $filename = time() . '.' . $file->extension();
+       $file->move('uploads/tenants/' , $filename);
+       $tenant->image = $filename;
+    }
+    else
+    {
+        return $request;
+        $tenant->image='';
+    }
        
 
        $res = $tenant->save();
@@ -52,7 +65,23 @@ class TenantController extends Controller
        $data->address = $request->input("address");
        $data->password = $request->input("password");
        $data->nid = $request->input("nid");
-       $data->image = $request->input("image");
+    //    $data->image = $request->input("image");
+    if($request->hasfile('image')){
+        $destination = 'uploads/tenants/'.$data->image;
+        if(File::exists($destination))
+        {
+            File::delete($destination);
+        }
+        
+        $file = $request->file('image');
+        $filename = time() . '.' . $request->image->extension();
+        $file->move('uploads/tenants/' , $filename);
+        $data->image = $filename;
+    }
+    else{
+        return $request;
+        $data->image='';
+    }
        
 
        $data->update();

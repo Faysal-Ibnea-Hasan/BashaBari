@@ -29,7 +29,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form autocomplete="off" action="{{Route('owner.form.update.put',['id'=>$data->id])}}" method="POST">
+              <form autocomplete="off" action="{{Route('owner.form.update.put',['id'=>$data->id])}}" enctype="multipart/form-data" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="card-body">
@@ -67,22 +67,22 @@
                     <label for="exampleInputPassword1">NID</label>
                     <input type="text" name="nid" value="{{$data->nid}}" class="form-control"  placeholder="Enter NID">
                   </div>
-                  <div class="form-group">
+                  {{-- <div class="form-group">
                     <label for="exampleInputPassword1">Image</label>
                     <input type="text" name="image" value="{{$data->image}}" class="form-control"  placeholder="Image">
-                  </div>
-                  {{-- <div class="form-group">
-                    <label for="exampleInputFile">File input</label>
+                  </div> --}}
+                  <div class="form-group">
+                    <label for="exampleInputFile">Image</label>
                     <div class="input-group">
                       <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile">
+                        <input type="file" value="{{$data->image}}" name="image" class="custom-file-input" id="exampleInputFile">
                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                       </div>
                       <div class="input-group-append">
                         <span class="input-group-text">Upload</span>
                       </div>
                     </div>
-                  </div> --}}
+                  </div>
                   
                   
                 </div>

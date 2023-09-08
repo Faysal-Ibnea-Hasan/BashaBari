@@ -29,7 +29,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form autocomplete="off" action="{{Route('flat.form.post')}}" method="POST">
+              <form autocomplete="off" action="{{Route('flat.form.post')}}" enctype="multipart/form-data" method="POST">
                 @csrf
                 <div class="card-body">
                   <div class="form-group">
@@ -75,22 +75,19 @@
                       </select>
                   </div>
                  
+                  
                   <div class="form-group">
-                    <label for="exampleInputPassword1">Image</label>
-                    <input type="text" name="image" class="form-control"  placeholder="Image">
-                  </div>
-                  {{-- <div class="form-group">
-                    <label for="exampleInputFile">File input</label>
+                    <label for="exampleInputFile">Image</label>
                     <div class="input-group">
                       <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile">
+                        <input type="file" name="image" class="custom-file-input" id="exampleInputFile">
                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                       </div>
                       <div class="input-group-append">
                         <span class="input-group-text">Upload</span>
                       </div>
                     </div>
-                  </div> --}}
+                  </div>
                   
                   
                 </div>

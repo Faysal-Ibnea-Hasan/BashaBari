@@ -91,7 +91,9 @@
                       <td>{{$flats->balconi}}</td>
                       <td>{{$flats->rent_value}}</td>
                       <td>{{$flats->Buildings->name}}</td>
-                      <td>{{$flats->image}}</td>
+                      <td>
+                        <img src="{{asset('uploads/flats/'.$flats->image)}}" width="70px" height="70px" alt="Image">
+                      </td>
                       <td>{{$flats->flat_Id}}</td>
                       
                       <td><a href="{{Route("flat.form.update",['id' => $flats->id])}}"><button type="button" class="btn btn-block btn-primary">Update</button></a></td>

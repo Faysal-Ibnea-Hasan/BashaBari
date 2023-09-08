@@ -86,7 +86,9 @@
                       <td>{{$owners->password}}</td>
                       <td>{{$owners->nid}}</td>
                       <td>{{$owners->Buildings->name}}</td>
-                      <td>{{$owners->image}}</td>
+                      <td>
+                        <img src="{{asset('uploads/owners/'.$owners->image)}}" width="100px" height="100px" alt="Image">
+                      </td>
                       
                       <td><a href="{{Route("owner.form.update",['id' => $owners->id])}}"><button type="button" class="btn btn-block btn-primary">Update</button></a></td>
                       <td><a href="{{Route("owner.delete",['id' => $owners->id])}}"><button type="button" class="btn btn-block btn-danger">Delete</button></a></td>

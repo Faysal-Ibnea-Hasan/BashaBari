@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Flats;
 use App\Models\Buildings;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\File;
 
 
 class FlatController extends Controller
@@ -35,15 +36,28 @@ class FlatController extends Controller
        $flat->washroom = $request->washroom;
        $flat->balconi = $request->balconi;
        $flat->rent_value = $request->rent_value;
-       $flat->image = $request->image;
-
-       
-       
-       
-
-       $res = $flat->save();
-       return redirect()->route('flat.table');
+    //    $flat->image = $request->image;
+    if($request->hasfile('image'))
+    {
+        $file = $request->file('image');
+        $filename = time() . '.' . $request->image->extension();
+        $file->move('uploads/flats/' , $filename);
+        $flat->image = $filename;
     }
+       
+    else
+    {
+        return $request;
+        $flat->image='';
+    }
+    $res = $flat->save();
+    return redirect()->route('flat.table');
+ }
+
+       
+       
+       
+
     
     public function GetFlatUpdateForm(Request $request)
     {
@@ -54,7 +68,7 @@ class FlatController extends Controller
         return view('update-flat', compact('data', 'dataBuilding'));
     }
 
-    public function UpdateBuilding(Request $request,$id)
+    public function UpdateFlat(Request $request,$id)
     {
         $data = Flats::find($id);
 
@@ -67,7 +81,23 @@ class FlatController extends Controller
         $data->washroom = $request->input('washroom');
         $data->balconi = $request->input('balconi');
         $data->rent_value = $request->input('rent_value');
-        $data->image = $request->input('image');
+        // $data->image = $request->input('image');
+        if($request->hasfile('image')){
+            $destination = 'uploads/flats/'.$data->image;
+            if(File::exists($destination))
+            {
+                File::delete($destination);
+            }
+            
+            $file = $request->file('image');
+            $filename = time() . '.' . $request->image->extension();
+            $file->move('uploads/flats/' , $filename);
+            $data->image = $filename;
+        }
+        else{
+            return $request;
+            $data->image='';
+        }
        
        
        
@@ -79,7 +109,7 @@ class FlatController extends Controller
     }
 
 
-    public function DeleteBuilding($id)
+    public function DeleteFlat($id)
     {
         $data = Flats::find($id);
         $data->delete();
