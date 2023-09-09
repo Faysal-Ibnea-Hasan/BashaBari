@@ -30,7 +30,13 @@ class OwnerController extends Controller
        $owner->address = $request->address;
        $owner->password = $request->password;
        $owner->nid = $request->nid;
-       $owner->building_Id = $request->building_Id;
+    //    $owner->building_Id = $request->building_Id;
+       if($request->building_Id){
+        $owner->building_Id = $request->building_Id;
+       }
+       else{
+        return $request;
+       }
     //    $owner->image = $request->image;
     if($request->hasfile('image'))
     {

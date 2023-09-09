@@ -10,8 +10,8 @@
 <body>
     
     @include('layouts.nav-bar')
-    
     @include('layouts.side-bar')
+    @include('layouts.dashboard-card')
     @include('layouts.footer')
 </body>
 </html>
