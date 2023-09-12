@@ -114,7 +114,7 @@
           <div class="col-md-6">
 
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-              Add Flat
+              <h6>Add Flat</h6><i class="fa-solid fa-plus fa-beat"></i>
             </button>
           </div>
           
