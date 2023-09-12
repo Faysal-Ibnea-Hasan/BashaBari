@@ -3,7 +3,7 @@ namespace App\Helpers;
 
 class Helper{
 
-    public static function Generator($model,$trow,$length=4,$prefix){
+    public static function Generator($model,$trow,$length=5,$prefix){
         $data = $model::orderby('id','desc')->first();
         if(!$data){
             $og_length = $length;

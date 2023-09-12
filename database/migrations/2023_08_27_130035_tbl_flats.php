@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('rent_value')->nullable();
             $table->string('image')->nullable();
             $table->string('flat_Id')->nullable();
+            $table->string('owner_Id')->nullable();
            
             
             

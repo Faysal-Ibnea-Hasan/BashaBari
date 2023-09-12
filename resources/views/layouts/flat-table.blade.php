@@ -90,7 +90,7 @@
                       <td>{{$flats->washroom}}</td>
                       <td>{{$flats->balconi}}</td>
                       <td>{{$flats->rent_value}}</td>
-                      <td>{{$flats->Buildings->name}}</td>
+                      <td>{{$flats->Buildings->name ?? 'No Building'}}</td>
                       <td>
                         <img src="{{asset('uploads/flats/'.$flats->image)}}" width="70px" height="70px" alt="Image">
                       </td>

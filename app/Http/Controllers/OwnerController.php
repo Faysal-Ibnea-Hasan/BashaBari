@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Owners;
 use App\Models\Buildings;
+use App\Models\Flats;
 use Illuminate\Support\Facades\File;
 
 class OwnerController extends Controller
@@ -18,7 +19,8 @@ class OwnerController extends Controller
     public function GetOwnerForm()
     {
         $dataBuildings = Buildings::get();
-        return view('create-owner',compact('dataBuildings'));
+        $dataOwners = Owners::get();
+        return view('create-owner',compact('dataBuildings','dataOwners'));
     }
 
     public function CreateOwner(Request $request)
@@ -47,12 +49,24 @@ class OwnerController extends Controller
     }
     else
     {
-       return $request;
+       
        $owner->image = '';
     }
 
        $res = $owner->save();
        return redirect()->route('owner.table');
+    }
+
+    public function AddFlat(Request $request)
+    {
+        $flat = new Flats();
+
+        $flat->unit_name = $request->unit_name;
+        $flat->owner_Id = $request->owner_Id;
+
+        $res = $flat->save();
+        return redirect()->route('owner.form.create');
+
     }
     
     public function GetOwnerUpdateForm(Request $request)
@@ -71,7 +85,13 @@ class OwnerController extends Controller
        $data->mobile = $request->input("mobile");
        $data->address = $request->input("address");
        $data->password = $request->input("password");
-       $data->nid = $request->input("nid");
+       if($request->input("nid")){
+
+            $data->nid = $request->input("nid");
+        }
+        else{
+            $data->nid = $data->nid;
+        }
        $data->building_Id = $request->input("building_Id");
     //    $data->image = $request->input("image");
     if($request->hasfile('image'))
@@ -89,8 +109,8 @@ class OwnerController extends Controller
     }
     else
     {
-        return $request;
-        $data->image='';
+        
+        $data->image=$data->image;
     }
 
     
