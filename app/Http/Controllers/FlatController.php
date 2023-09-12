@@ -9,6 +9,7 @@ use App\Helpers\Helper;
 use Illuminate\Support\Facades\File;
 
 
+
 class FlatController extends Controller
 {
     public function GetFlatList()
@@ -16,6 +17,12 @@ class FlatController extends Controller
         // $data = $id?Owners::find($id):Owners::with('Buildings');
         $data = Flats::get();
         return view('table-flat',compact('data'));
+    }
+    public function GetDetails(Request $request)
+    {
+        $data = Flats::where('id', $request->id)->get();
+        return view('details-flat',compact('data'));
+        
     }
     public function GetFlatForm()
     {

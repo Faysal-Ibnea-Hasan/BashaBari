@@ -67,15 +67,14 @@
                     <th>Flat ID</th>
                     <th>Unit Name</th>
                     <th>Flat Owner</th>
-                    {{-- <th>Floor</th>
+                    <th>Floor</th>
                     <th>Area</th>
                     <th>Room</th>
                     <th>Washroom</th>
                     <th>Balconi</th>
                     <th>Rent Value</th>
-                    <th>Building Name</th> --}}
-                    <th>Image</th>
-                    <th colspan="2">Action</th>
+                    <th>Building Name</th>
+                    
                     
                     
                   </tr>
@@ -88,21 +87,17 @@
                       <td>{{$flats->flat_Id}}</td>
                       <td>{{$flats->unit_name}}</td>
                       <td>{{$flats->Owners->name ?? 'No Owner'}}</td>
-                      {{-- <td>{{$flats->floor}}</td>
+                      <td>{{$flats->floor}}</td>
                       <td>{{$flats->area}}</td>
                       <td>{{$flats->room}}</td>
                       <td>{{$flats->washroom}}</td>
                       <td>{{$flats->balconi}}</td>
                       <td>{{$flats->rent_value}}</td>
-                      <td>{{$flats->Buildings->name ?? 'No Building'}}</td> --}}
-                      <td>
-                        <img src="{{asset('uploads/flats/'.$flats->image)}}" width="70px" height="70px" alt="Image">
-                      </td>
+                      <td>{{$flats->Buildings->name ?? 'No Building'}}</td>
                       
                       
-                      <td><a href="{{Route("flat.form.update",['id' => $flats->id])}}"><button type="button" class="btn btn-block btn-primary">Update</button></a></td>
-                      <td><a href="{{Route("flat.form.details",['id' => $flats->id])}}"><button type="button" class="btn btn-block btn-info">Details</button></a></td>
-                      <td><a href="{{Route("flat.delete",['id' => $flats->id])}}"><button type="button" class="btn btn-block btn-danger">Delete</button></a></td>
+                      
+                      
                     </tr>
                     @endforeach
                   

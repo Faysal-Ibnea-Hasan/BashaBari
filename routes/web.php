@@ -78,6 +78,9 @@ Route::controller(FlatController::class)->group(function () {
                              //===Update===
     Route::get('Flat/Update/{id}','GetFlatUpdateForm')->name('flat.form.update');
     Route::put('Flat/Updated/{id}','UpdateFlat')->name('flat.form.update.put');
+                             //===Details===
+    Route::get('Flat/Details/{id}','GetDetails')->name('flat.form.details');
+                             
 });
 //===================================TENANT CONTROLLER================================================
 Route::controller(TenantController::class)->group(function () {
