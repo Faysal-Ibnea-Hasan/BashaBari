@@ -46,6 +46,10 @@
                     <label for="exampleInputPassword1">Developed By</label>
                     <input type="text" name="developer" value="{{$data->developer}}" class="form-control"  placeholder="Developed By">
                   </div>
+                  <div class="form-group">
+                    <label for="date">Date:</label>
+                    <input type="date" value="{{$data->date}}" name="date" id="date"/>
+                  </div>
                   
                   
                   

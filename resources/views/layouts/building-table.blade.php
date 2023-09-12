@@ -63,10 +63,11 @@
                   <thead>
                   <tr>
                     <th>S.N</th>
+                    <th>Building ID</th>
                     <th>Building's Name</th>
                     <th>Address</th>
                     <th>Developed By</th>
-                    <th>Building ID</th>
+                    <th>Developed Date</th>
                     <th colspan="2">Action</th>
                     
                     
@@ -80,10 +81,11 @@
                         
                     <tr>
                       <td>{{$key+1}}</td>
+                      <td>{{$buildings->building_Id}}</td>
                       <td>{{$buildings->name}}</td>
                       <td>{{$buildings->address}}</td>
                       <td>{{$buildings->developer}}</td>
-                      <td>{{$buildings->building_Id}}</td>
+                      <td>{{$buildings->date}}</td>
                       
                       
                       

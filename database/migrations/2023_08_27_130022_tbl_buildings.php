@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('developer')->nullable();
             $table->string('building_Id')->nullable();
+            $table->date('date')->nullable();
             
             
             

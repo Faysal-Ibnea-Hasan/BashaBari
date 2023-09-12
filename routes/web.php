@@ -44,7 +44,6 @@ Route::controller(OwnerController::class)->group(function () {
                              //===Create===
     Route::get('Owner/Create_Form','GetOwnerForm')->name('owner.form.create');
     Route::post('Owner/Create_Form_Post','CreateOwner')->name('owner.form.post');
-    Route::post('Owner/Add_Flat_Form_Post','AddFlat')->name('owner.flat.form.post');
                              //===View===
     Route::get('Owner/Table','GetOwnerList')->name('owner.table');
                              //===Delete===
@@ -58,6 +57,7 @@ Route::controller(BuildingController::class)->group(function () {
                              //===Create===
     Route::get('Building/Create_Form','GetBuildingForm')->name('building.form.create');
     Route::post('Building/Create_Form_Post','CreateBuilding')->name('building.form.post');
+    Route::post('Building/Create_Flat_Form_Post','AddFlat')->name('building.flat.form.post');
                              //===View===
     Route::get('Building/Table','GetBuildingList')->name('building.table');
                              //===Delete===

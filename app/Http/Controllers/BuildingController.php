@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Buildings;
+use App\Models\Owners;
+use App\Models\Flats;
 use App\Helpers\Helper;
 
 class BuildingController extends Controller
@@ -16,8 +18,8 @@ class BuildingController extends Controller
     }
     public function GetBuildingForm()
     {
-        
-        return view('create-building');
+        $dataOwners = Owners::get();
+        return view('create-building',compact('dataOwners'));
     }
 
     public function CreateBuilding(Request $request)
@@ -28,12 +30,24 @@ class BuildingController extends Controller
        $building->address = $request->address;
        $building->developer = $request->developer;
        $building->building_Id = Helper::Generator(new Buildings,'building_Id',5,'BID');
+       $building->date = $request->date;
        
        
        
 
        $res = $building->save();
        return redirect()->route('building.table');
+    }
+    public function AddFlat(Request $request)
+    {
+        $flat = new Flats();
+
+        $flat->unit_name = $request->unit_name;
+        $flat->owner_Id = $request->owner_Id;
+
+        $res = $flat->save();
+        return redirect()->route('building.form.create');
+
     }
     
     public function GetBuildingUpdateForm(Request $request)
@@ -51,6 +65,7 @@ class BuildingController extends Controller
        $data->name = $request->input("name");
        $data->address = $request->input("address");
        $data->developer = $request->input("developer");
+       $data->date = $request->input("date");
        
        
        

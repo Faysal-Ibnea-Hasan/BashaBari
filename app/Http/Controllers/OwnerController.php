@@ -19,8 +19,8 @@ class OwnerController extends Controller
     public function GetOwnerForm()
     {
         $dataBuildings = Buildings::get();
-        $dataOwners = Owners::get();
-        return view('create-owner',compact('dataBuildings','dataOwners'));
+        
+        return view('create-owner',compact('dataBuildings'));
     }
 
     public function CreateOwner(Request $request)
@@ -57,17 +57,7 @@ class OwnerController extends Controller
        return redirect()->route('owner.table');
     }
 
-    public function AddFlat(Request $request)
-    {
-        $flat = new Flats();
-
-        $flat->unit_name = $request->unit_name;
-        $flat->owner_Id = $request->owner_Id;
-
-        $res = $flat->save();
-        return redirect()->route('owner.form.create');
-
-    }
+    
     
     public function GetOwnerUpdateForm(Request $request)
     {
