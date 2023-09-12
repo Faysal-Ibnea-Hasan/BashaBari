@@ -63,16 +63,17 @@
                   <thead>
                   <tr>
                     <th>S.N</th>
+                    <th>Flat ID</th>
                     <th>Unit Name</th>
-                    <th>Floor</th>
+                    <th>Flat Owner</th>
+                    {{-- <th>Floor</th>
                     <th>Area</th>
                     <th>Room</th>
                     <th>Washroom</th>
                     <th>Balconi</th>
                     <th>Rent Value</th>
-                    <th>Building Name</th>
+                    <th>Building Name</th> --}}
                     <th>Image</th>
-                    <th>Flat ID</th>
                     <th colspan="2">Action</th>
                     
                     
@@ -83,20 +84,23 @@
                         
                     <tr>
                       <td>{{$key+1}}</td>
+                      <td>{{$flats->flat_Id}}</td>
                       <td>{{$flats->unit_name}}</td>
-                      <td>{{$flats->floor}}</td>
+                      <td>{{$flats->Owners->name ?? 'No Owner'}}</td>
+                      {{-- <td>{{$flats->floor}}</td>
                       <td>{{$flats->area}}</td>
                       <td>{{$flats->room}}</td>
                       <td>{{$flats->washroom}}</td>
                       <td>{{$flats->balconi}}</td>
                       <td>{{$flats->rent_value}}</td>
-                      <td>{{$flats->Buildings->name ?? 'No Building'}}</td>
+                      <td>{{$flats->Buildings->name ?? 'No Building'}}</td> --}}
                       <td>
                         <img src="{{asset('uploads/flats/'.$flats->image)}}" width="70px" height="70px" alt="Image">
                       </td>
-                      <td>{{$flats->flat_Id}}</td>
+                      
                       
                       <td><a href="{{Route("flat.form.update",['id' => $flats->id])}}"><button type="button" class="btn btn-block btn-primary">Update</button></a></td>
+                      <td><a href="{{Route("flat.form.update",['id' => $flats->id])}}"><button type="button" class="btn btn-block btn-info">Details</button></a></td>
                       <td><a href="{{Route("flat.delete",['id' => $flats->id])}}"><button type="button" class="btn btn-block btn-danger">Delete</button></a></td>
                     </tr>
                     @endforeach
