@@ -79,7 +79,7 @@
                     <th>Rent Value</th>
                     <th>Building Name</th> --}}
                     <th>Image</th>
-                    <th colspan="2">Action</th>
+                    <th colspan="3">Action</th>
                     
                     
                   </tr>

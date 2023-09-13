@@ -42,7 +42,7 @@ class FlatController extends Controller
        $flat->building_Id = $request->building_Id;
        $flat->floor = $request->floor;
        $flat->area = $request->area;
-       $flat->flat_Id = Helper::Generator(new Flats,'flat_Id',5,'FID');
+       $flat->flat_Id = Helper::Generator(new Flats,'flat_Id',4,'Flat#');
        $flat->room = $request->room;
        $flat->washroom = $request->washroom;
        $flat->balconi = $request->balconi;
