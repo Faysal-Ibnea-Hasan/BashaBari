@@ -18,11 +18,15 @@ class FlatController extends Controller
         $data = Flats::get();
         return view('table-flat',compact('data'));
     }
-    public function GetDetails(Request $request)
-    {
-        $data = Flats::where('id', $request->id)->get();
-        return view('details-flat',compact('data'));
+    // public function GetDetails(Request $request)
+    // {
+    //     $data = Flats::where('id', $request->id)->get();
+    //     return view('details-flat',compact('data'));
         
+    // }
+    public function GetDetails($id){
+        $data = Flats::find($id);
+        return response()->json($data);
     }
     public function GetFlatForm()
     {
@@ -54,7 +58,7 @@ class FlatController extends Controller
        
     else
     {
-        return $request;
+        
         $flat->image='';
     }
     $res = $flat->save();
@@ -102,8 +106,8 @@ class FlatController extends Controller
             $data->image = $filename;
         }
         else{
-            return $request;
-            $data->image='';
+            
+            $data->image=$data->image;
         }
        
        

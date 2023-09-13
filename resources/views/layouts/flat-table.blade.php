@@ -4,6 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Flat|Table</title>
+  <!--AJAX-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -101,7 +105,7 @@
                       
                       
                       <td><a href="{{Route("flat.form.update",['id' => $flats->id])}}"><button type="button" class="btn btn-block btn-primary">Update</button></a></td>
-                      <td><a href="{{Route("flat.form.details",['id' => $flats->id])}}"><button type="button" class="btn btn-block btn-info">Details</button></a></td>
+                      <td><a href="javascript:void(0)" id="flat-details" data-url="{{route('flat.details',$flats->id)}}"><button type="button" class="btn btn-block btn-info">Details</button></a></td>
                       <td><a href="{{Route("flat.delete",['id' => $flats->id])}}"><button type="button" class="btn btn-block btn-danger">Delete</button></a></td>
                     </tr>
                     @endforeach
@@ -135,6 +139,32 @@
   
 
   
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="flatDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>ID:</strong> <span id="flat_Id"></span></p>
+        <p><strong>Unit Name:</strong> <span id="unit_name"></span></p>
+        <p><strong>Floor:</strong> <span id="floor"></span></p>
+        <p><strong>Area:</strong> <span id="area"></span></p>
+        <p><strong>Room:</strong> <span id="room"></span></p>
+        <p><strong>Washroom:</strong> <span id="washroom"></span></p>
+        <p><strong>Balconi:</strong> <span id="balconi"></span></p>
+        <p><strong>Rent Amount:</strong> <span id="rent_value"></span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -179,4 +209,26 @@
   });
 </script>
 </body>
+<script type="text/javascript">
+
+  $(document).ready(function() {
+      /*when click details*/
+      $('body').on('click', '#flat-details' , function(){
+          var userURL = $(this).data('url');
+          $.get(userURL, function(data){
+  
+              $('#flatDetails').modal('show');
+              $('#flat_Id').text(data.id);
+              $('#unit_name').text(data.unit_name);
+              $('#floor').text(data.floor);
+              $('#area').text(data.area);
+              $('#room').text(data.room);
+              $('#washroom').text(data.washroom);
+              $('#balconi').text(data.balconi);
+              $('#rent_value').text(data.rent_value);
+          })
+      });
+  });
+  
+</script>
 </html>
