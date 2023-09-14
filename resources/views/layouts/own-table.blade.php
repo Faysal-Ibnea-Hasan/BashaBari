@@ -79,13 +79,13 @@
                     <tr>
                       <td>{{$key+1}}</td>
                       <td>{{$owns->Owners->name}}</td>
-                      <td>{{$owns->Flats->unit_name}}</td>
-                      <td>{{$owns->Owners->Buildings->name}}</td>
+                      <td>{{$owns->Flats->unit_name ?? "No Flat Assigned"}}</td>
+                      <td>{{$owns->Owners->Buildings->name ?? "No Building Assigned"}}</td>
                       
                       
                       
-                      <td><a href="{{Route("own.form.update",['id' => $owns->id])}}"><button type="button" class="btn btn-block btn-primary">Update</button></a></td>
-                      <td><a href="{{Route("own.delete",['id' => $owns->id])}}"><button type="button" class="btn btn-block btn-danger">Delete</button></a></td>
+                      <td><a href="{{Route("own.form.update",['id' => $owns->id])}}"><button type="button" class="btn btn-block btn-primary rounded-pill">Update</button></a></td>
+                      <td><a href="{{Route("own.delete",['id' => $owns->id])}}"><button type="button" class="btn btn-block btn-danger rounded-pill">Delete</button></a></td>
                     </tr>
                     @endforeach
                   

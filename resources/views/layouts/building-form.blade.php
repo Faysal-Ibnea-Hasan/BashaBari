@@ -119,7 +119,7 @@
                         
                         <option name="owner_Id" value="owner_Id" >Select</option>
                         @foreach ($dataOwners as $key=>$data)
-                        <option name="owner_Id" value="{{ $data->id }}" >{{ $data->id}},{{$data->name}}</option>
+                        <option name="owner_Id" value="{{ $data->id }}" >#{{ $data->id}},{{$data->name}}</option>
               
                         @endforeach
                       </select>

@@ -90,8 +90,8 @@
                       
                       
                       
-                      <td><a href="{{Route("building.form.update",['id' => $buildings->id])}}"><button type="button" class="btn btn-block btn-primary">Update</button></a></td>
-                      <td><a href="{{Route("building.delete",['id' => $buildings->id])}}"><button type="button" class="btn btn-block btn-danger">Delete</button></a></td>
+                      <td><a href="{{Route("building.form.update",['id' => $buildings->id])}}"><button type="button" class="btn btn-block btn-primary rounded-pill">Update</button></a></td>
+                      <td><a href="{{Route("building.delete",['id' => $buildings->id])}}"><button type="button" class="btn btn-block btn-danger rounded-pill">Delete</button></a></td>
                     </tr>
                     @endforeach
                   

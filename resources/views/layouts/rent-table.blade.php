@@ -84,8 +84,8 @@
                       
                       
                       
-                      <td><a href="{{Route("rent.form.update",['id' => $rents->id])}}"><button type="button" class="btn btn-block btn-primary">Update</button></a></td>
-                      <td><a href="{{Route("rent.delete",['id' => $rents->id])}}"><button type="button" class="btn btn-block btn-danger">Delete</button></a></td>
+                      <td><a href="{{Route("rent.form.update",['id' => $rents->id])}}"><button type="button" class="btn btn-block btn-primary rounded-pill">Update</button></a></td>
+                      <td><a href="{{Route("rent.delete",['id' => $rents->id])}}"><button type="button" class="btn btn-block btn-danger rounded-pill">Delete</button></a></td>
                     </tr>
                     @endforeach
                   

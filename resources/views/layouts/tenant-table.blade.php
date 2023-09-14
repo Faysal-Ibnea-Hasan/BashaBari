@@ -90,8 +90,8 @@
                         <img src="{{asset('uploads/tenants/'.$tenants->image)}}" width="100px" height="100px" alt="Image">
                       </td>
                       
-                      <td><a href="{{Route("tenant.form.update",['id' => $tenants->id])}}"><button type="button" class="btn btn-block btn-primary">Update</button></a></td>
-                      <td><a href="{{Route("tenant.delete",['id' => $tenants->id])}}"><button type="button" class="btn btn-block btn-danger">Delete</button></a></td>
+                      <td><a href="{{Route("tenant.form.update",['id' => $tenants->id])}}"><button type="button" class="btn btn-block btn-primary rounded-pill">Update</button></a></td>
+                      <td><a href="{{Route("tenant.delete",['id' => $tenants->id])}}"><button type="button" class="btn btn-block btn-danger rounded-pill">Delete</button></a></td>
                     </tr>
                     @endforeach
                   

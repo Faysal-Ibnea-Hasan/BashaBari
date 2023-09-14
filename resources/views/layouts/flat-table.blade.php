@@ -91,7 +91,8 @@
                       <td>{{$key+1}}</td>
                       <td>{{$flats->flat_Id}}</td>
                       <td>{{$flats->unit_name}}</td>
-                      <td>{{$flats->Owners->name ?? 'No Owner'}}</td>
+                      <td>#{{$flats->owner_Id}},{{$flats->Owners->name ?? 'No Owner'}}</td>
+                      <td>{{$flats->building_Id}},{{$flats->Buildings->name ?? 'No Building'}}</td>
                       {{-- <td>{{$flats->floor}}</td>
                       <td>{{$flats->area}}</td>
                       <td>{{$flats->room}}</td>
@@ -104,9 +105,9 @@
                       </td>
                       
                       
-                      <td><a href="{{Route("flat.form.update",['id' => $flats->id])}}"><button type="button" class="btn btn-block btn-primary">Update</button></a></td>
-                      <td><a href="javascript:void(0)" id="flat-details" data-url="{{route('flat.details',$flats->id)}}"><button type="button" class="btn btn-block btn-info">Details</button></a></td>
-                      <td><a href="{{Route("flat.delete",['id' => $flats->id])}}"><button type="button" class="btn btn-block btn-danger">Delete</button></a></td>
+                      <td><a href="{{Route("flat.form.update",['id' => $flats->id])}}"><button type="button" class="btn btn-block btn-primary rounded-pill">Update</button></a></td>
+                      <td><a href="javascript:void(0)" id="flat-details" data-url="{{route('flat.details',$flats->id)}}"><button type="button" class="btn btn-block btn-info rounded-pill">Details</button></a></td>
+                      <td><a href="{{Route("flat.delete",['id' => $flats->id])}}"><button type="button" class="btn btn-block btn-danger rounded-pill">Delete</button></a></td>
                     </tr>
                     @endforeach
                   
