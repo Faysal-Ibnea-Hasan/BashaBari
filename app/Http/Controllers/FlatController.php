@@ -36,6 +36,15 @@ class FlatController extends Controller
 
     public function CreateFlat(Request $request)
     {
+    //    $this->validate($request,[
+
+         
+    //      'image' => 'required',
+    //      'image.*' => 'image|mimes:jpg,jpeg,png,gif,svg|max:5120'
+    //    ]);
+    
+       
+    
        $flat = new Flats();
 
        $flat->unit_name = $request->unit_name;
@@ -47,21 +56,27 @@ class FlatController extends Controller
        $flat->washroom = $request->washroom;
        $flat->balconi = $request->balconi;
        $flat->rent_value = $request->rent_value;
-    //    $flat->image = $request->image;
-    if($request->hasfile('image'))
+       if($request->hasfile('image'))
     {
-        $file = $request->file('image');
-        $filename = time() . '.' . $request->image->extension();
-        $file->move('uploads/flats/' , $filename);
-        $flat->image = $filename;
+        foreach($request->file('image') as $file)
+        {
+
+            // $file = $request->file('image');
+            $filename = time().'_'. $file->extension();
+            $file->move('uploads/flats/' , $filename);
+            $data[] = $filename;
+            // $flat->image = $filename;
+            $flat->image = json_encode($data);
+            
+        }
     }
        
     else
     {
-        
         $flat->image='';
     }
-    $res = $flat->save();
+    
+       $res=$flat->save();
     return redirect()->route('flat.table');
  }
 
@@ -99,25 +114,32 @@ class FlatController extends Controller
             {
                 File::delete($destination);
             }
+            foreach($request->file('image') as $file)
+            {
+    
+                // $file = $request->file('image');
+                $filename = $file->extension();
+                $file->move('uploads/flats/' , $filename);
+                $datas[] = $filename;
+                // $flat->image = $filename;
+                $data->image = json_encode($datas);
+                
+            }
             
-            $file = $request->file('image');
-            $filename = time() . '.' . $request->image->extension();
-            $file->move('uploads/flats/' , $filename);
-            $data->image = $filename;
         }
         else{
-            
             $data->image=$data->image;
         }
-       
-       
-       
-       
-
-       $data->update();
-
-       return redirect()->route('flat.table');
+        $data->update();
+        return redirect()->route('flat.table');
     }
+            
+       
+       
+       
+       
+
+
 
 
     public function DeleteFlat($id)
