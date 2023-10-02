@@ -49,7 +49,7 @@
                     
                     <option name="flat_Id" value="flat_Id" >Select</option>
                     @foreach ($dataFlats as $key=>$data)
-                    <option name="flat_Id" value="{{ $data->flat_Id }}" >{{ $data->Buildings->name }}</option>
+                    <option name="flat_Id" value="{{ $data->flat_Id }}" >{{ $data->Buildings->name ?? "No building" }}</option>
           
                     @endforeach
                   </select>

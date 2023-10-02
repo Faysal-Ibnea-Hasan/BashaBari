@@ -11,6 +11,7 @@ class Flats extends Model
 {
     use HasFactory;
     protected $table = 'tbl_flats';
+    
 
     public function Buildings(){
         return $this->belongsTo(Buildings::class,'building_Id','building_Id');

@@ -17,16 +17,32 @@ class FlatController extends Controller
         // $data = $id?Owners::find($id):Owners::with('Buildings');
         $data = Flats::get();
         return view('table-flat',compact('data'));
+        
+    }
+    public function GetFlatImage($id)
+    {
+
+        // $data = $id?Owners::find($id):Owners::with('Buildings');
+        
+        $data = Flats::where('id',$id)->get();
+        
+        // $myarray = json_decode($data, true);
+        
+        return view('image-flat',compact('data'));
+        
     }
     // public function GetDetails(Request $request)
     // {
     //     $data = Flats::where('id', $request->id)->get();
     //     return view('details-flat',compact('data'));
-        
     // }
-    public function GetDetails($id){
+        
+    public function GetDetails($id)
+    {
         $data = Flats::find($id);
-        return response()->json($data);
+        return response()->json(
+             $data
+        );
     }
     public function GetFlatForm()
     {
@@ -68,6 +84,7 @@ class FlatController extends Controller
             // $flat->image = $filename;
             $flat->image = json_encode($data);
             
+            
         }
     }
        
@@ -108,7 +125,8 @@ class FlatController extends Controller
         $data->balconi = $request->input('balconi');
         $data->rent_value = $request->input('rent_value');
         // $data->image = $request->input('image');
-        if($request->hasfile('image')){
+        if($request->hasfile('image'))
+        {
             $destination = 'uploads/flats/'.$data->image;
             if(File::exists($destination))
             {
@@ -123,11 +141,12 @@ class FlatController extends Controller
                 $datas[] = $filename;
                 // $flat->image = $filename;
                 $data->image = json_encode($datas);
-                
             }
-            
         }
-        else{
+                
+            
+        else
+        {
             $data->image=$data->image;
         }
         $data->update();

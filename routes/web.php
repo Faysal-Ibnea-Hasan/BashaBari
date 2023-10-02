@@ -73,6 +73,7 @@ Route::controller(FlatController::class)->group(function () {
     Route::post('Flat/Create_Form_Post','CreateFlat')->name('flat.form.post');
                              //===View===
     Route::get('Flat/Table','GetFlatList')->name('flat.table');
+    Route::get('Flat/Image/{id}','GetFlatImage')->name('flat.image');
                              //===Delete===
     Route::get('DeleteFlat/{id}','DeleteFlat')->name('flat.delete');
                              //===Update===

@@ -4,11 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Flat|Table</title>
-  <!--AJAX-->
+  
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -19,6 +16,8 @@
   <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+
   
 </head>
 <body class="hold-transition sidebar-mini">
@@ -71,6 +70,7 @@
                     <th>Flat ID</th>
                     <th>Unit Name</th>
                     <th>Flat Owner</th>
+                    <th>Building Name</th> 
                     {{-- <th>Floor</th>
                     <th>Area</th>
                     <th>Room</th>
@@ -100,13 +100,17 @@
                       <td>{{$flats->balconi}}</td>
                       <td>{{$flats->rent_value}}</td>
                       <td>{{$flats->Buildings->name ?? 'No Building'}}</td> --}}
-                      <td>
-                        <img src="{{asset('uploads/flats/'.$flats->image)}}" width="70px" height="70px" alt="Image">
-                      </td>
+
                       
+                        {{-- <img src="{{asset('uploads/flats/'.$flats->image)}}" width="70px" height="70px" alt="Image"> --}}
                       
-                      <td><a href="{{Route("flat.form.update",['id' => $flats->id])}}"><button type="button" class="btn btn-block btn-primary rounded-pill">Update</button></a></td>
+                      <td><a href="{{route('flat.image',$flats->id)}}" id="image-details"><button type="button" class="btn btn-block btn-info rounded-pill">Details</button></a></td>
+                      
+                      <td><a href="{{route("flat.form.update",$flats->id)}}"><button type="button" class="btn btn-block btn-primary rounded-pill">Update</button></a></td>
+                      
+
                       <td><a href="javascript:void(0)" id="flat-details" data-url="{{route('flat.details',$flats->id)}}"><button type="button" class="btn btn-block btn-info rounded-pill">Details</button></a></td>
+
                       <td><a href="{{Route("flat.delete",['id' => $flats->id])}}"><button type="button" class="btn btn-block btn-danger rounded-pill">Delete</button></a></td>
                     </tr>
                     @endforeach
@@ -142,7 +146,7 @@
   
 </div>
 
-<!-- Modal -->
+<!-- Modal For Details View -->
 <div class="modal fade" id="flatDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -162,11 +166,55 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        
       </div>
     </div>
   </div>
 </div>
+        
+<!--Modal For Image View -->
+{{-- <div class="modal fade" id="imageDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+        
+        
+ 
+        
+          
+        
+        
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        
+        <div>
+
+          @foreach(json_decode($data) as $key => $image)
+          
+          <img src="{{asset('uploads/flats/'.$image->image)}}"  height="100px" width="100px" >
+          
+          @endforeach
+        </div>
+ 
+        
+          
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div> --}}
+
+
+
+
 
 
 
@@ -192,6 +240,10 @@
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
 <!-- Page specific script -->
+<!--AJAX-->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
   $(function () {
     $("#example1").DataTable({
@@ -210,12 +262,55 @@
   });
 </script>
 </body>
+{{-- <script>
+  $(document).ready(function(){
+    $.('#updatebtn').on('click', function(){
+      $('#flatUpdate').modal('show');
+
+    });
+  });
+
+  $('#update-flat').on('submit', function(e){
+    e.preventDefault();
+    var id = $(#id).val();
+
+    $.ajax({
+      type: "PUT",
+      url: "Flat/Updated/"+id,
+      data: $(#update-flat).serialize(),
+      
+    })
+  })
+</script> --}}
+
 <script type="text/javascript">
+// $(document).ready(function(){
+//   $.ajaxSetup({
+//     headers: {
+//       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//     }
+//   });
+//   fetchData();
+
+//   function fetchData() 
+//   {
+//     $.ajax({
+//       type:"GET",
+//       url: "Details/{id}",
+//       dataType: "json",
+//       success: function(response){
+//         console.log(response);
+//       }
+//     })
+
+//   }
+// })
 
   $(document).ready(function() {
       /*when click details*/
       $('body').on('click', '#flat-details' , function(){
           var userURL = $(this).data('url');
+          var image = $(this).data('image');
           $.get(userURL, function(data){
   
               $('#flatDetails').modal('show');
@@ -227,9 +322,63 @@
               $('#washroom').text(data.washroom);
               $('#balconi').text(data.balconi);
               $('#rent_value').text(data.rent_value);
+              
+
           })
       });
   });
-  
 </script>
+ <script type="text/javascript">
+
+  $(document).ready(function() {
+      /*when click details*/
+      $('body').on('click', '#image-details' , function(){
+        $('#imageDetails').modal('show');
+        var userURL = $(this).data('url');
+        $.get(userURL, function(data){
+          $('#flat_Id').text(data.id);
+          $('#image').attr("src","uploads/flats/"+image);
+        })
+          
+        // $.ajax({
+        //   type: 'GET',
+        //   url :"Flat/Update"+id,
+        //   success: function(response){
+        //     $('#name').val(response.
+        //   }
+
+        // }) 
+  
+              
+          
+      });
+  });
+  
+</script> 
+
+  
+  
+{{-- <script type="text/javascript">
+
+  $(document).ready(function() {
+      /*when click details*/
+      $('body').on('click', '#image-details' , function(){
+        $('#imageDetails').modal('show');
+          
+        $.ajax({
+          type: 'GET',
+          url :"Flat/Update"+id,
+          success: function(response){
+            $('#name').val(response.
+          }
+
+        }) 
+  
+              
+          
+      });
+  });
+  
+</script> --}}
+
 </html>
