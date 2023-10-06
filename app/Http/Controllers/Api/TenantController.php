@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Tenants;
@@ -8,20 +9,20 @@ use Illuminate\Support\Facades\File;
 
 class TenantController extends Controller
 {
-    public function GetTenantList()
+    public function GetTenantList($id=null)
     {
         // $data = $id?Owners::find($id):Owners::with('Buildings');
-        $data = Tenants::get();
-        return view('table-tenant',compact('data'));
+        $data = $id?Tenants::find($id):Tenants::all();
+        return response()->json([
+            'status' => true,
+            'massage' => 'success',
+            'data' => $data
+        ]);
     }
-    public function GetTenantForm()
-    {
 
-        return view('create-tenant');
-    }
 
     public function CreateTenant(Request $request)
-{
+    {
        $tenant = new Tenants();
 
        $tenant->name = $request->name;
@@ -45,16 +46,13 @@ class TenantController extends Controller
 
 
        $res = $tenant->save();
-       return redirect()->route('tenant.table');
+       return response()->json([
+        'status' => true,
+        'massage' => 'Tenant created successfully',
+        ]);
 }
 
-    public function GetTenantUpdateForm(Request $request)
-    {
-        $data = Tenants::find($request->id);
 
-
-        return view('update-tenant', compact('data'));
-    }
 
     public function UpdateTenant(Request $request,$id)
     {
@@ -79,14 +77,17 @@ class TenantController extends Controller
         $data->image = $filename;
     }
     else{
-        return $request;
+
         $data->image='';
     }
 
 
        $data->update();
 
-       return redirect()->route('tenant.table');
+       return response()->json([
+        'status' => true,
+        'massage' => 'Tenant updated successfully',
+       ]);
     }
 
 
@@ -96,6 +97,9 @@ class TenantController extends Controller
         $data->delete();
 
 
-        return redirect()->route('tenant.table');
+        return response()->json([
+            'status' => true,
+            'massage' => 'Tenant deleted successfully',
+        ]);
     }
 }

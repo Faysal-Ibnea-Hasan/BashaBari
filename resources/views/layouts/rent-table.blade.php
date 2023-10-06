@@ -15,16 +15,16 @@
   <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-  
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
   <!-- Navbar -->
-  
+
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  
+
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -50,8 +50,8 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            
-            
+
+
 
             <div class="card">
               <div class="card-header">
@@ -66,30 +66,32 @@
                     <th>Tenant's Name</th>
                     <th>Unit Name</th>
                     <th>Building Name</th>
+                    <th>Rent Value</th>
                     <th colspan="2">Action</th>
-                    
-                    
-                    
-                    
+
+
+
+
                   </tr>
                   </thead>
                   <tbody>
                     @foreach ($data as $key=> $rents)
-                        
+
                     <tr>
                       <td>{{$key+1}}</td>
                       <td>{{$rents->Tenants->name}}</td>
                       <td>{{$rents->Flats->unit_name}}</td>
                       <td>{{$rents->Flats->Buildings->name}}</td>
-                      
-                      
-                      
+                      <td>{{$rents->Flats->rent_value}}</td>
+
+
+
                       <td><a href="{{Route("rent.form.update",['id' => $rents->id])}}"><button type="button" class="btn btn-block btn-primary rounded-pill">Update</button></a></td>
                       <td><a href="{{Route("rent.delete",['id' => $rents->id])}}"><button type="button" class="btn btn-block btn-danger rounded-pill">Delete</button></a></td>
                     </tr>
                     @endforeach
-                  
-                  
+
+
                   </tbody>
                   {{-- <tfoot>
                   <tr>
@@ -115,7 +117,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
+
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
