@@ -34,6 +34,7 @@ Route::controller(BuildingController::class)->group(function () {
     // =============================Owner API========================================
 Route::controller(OwnerController::class)->group(function () {
     Route::get('Api/Owner/Table/{id?}', 'GetOwnerList');
+    Route::post('Api/Owner/Check', 'CheckOwner');
     Route::post('Api/Owner/Create_Form_Post', 'CreateOwner');
     Route::put('Api/Owner/Updated/{id}', 'UpdateOwner');
     Route::delete('Api/DeleteOwner/{id}', 'DeleteOwner');

@@ -15,11 +15,33 @@ class OwnerController extends Controller
     {
         // $data = $id?Owners::find($id):Owners::with('Buildings');
         $data = $id?Owners::find($id):Owners::all();
+
         return response()->json([
             'status' => true,
             'massage' => 'success',
             'data' => $data
         ]);
+    }
+    public function CheckOwner(Request $request){
+        $mobile = $request->mobile;
+        $password = $request->password;
+        $data = Owners::Where('mobile','=',$mobile)->first();
+        $data1 = Owners::Where('password','=',$password)->first();
+        if($data && $data1){
+
+            return response()->json([
+                'status' => true,
+                'massage' => 'Found',
+                'data' => $data
+            ]);
+        }
+        else{
+            return response()->json([
+                'status' => false,
+                'massage' => 'Not Found',
+
+            ]);
+        }
     }
 
 
