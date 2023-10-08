@@ -19,6 +19,27 @@ class TenantController extends Controller
             'data' => $data
         ]);
     }
+    public function CheckTenant(Request $request){
+        $mobile = $request->mobile;
+        $password = $request->password;
+        $data = Tenants::Where('mobile','=',$mobile)->first();
+        $data1 = Tenants::Where('password','=',$password)->first();
+        if($data && $data1){
+
+            return response()->json([
+                'status' => true,
+                'massage' => 'Found',
+                'data' => $data
+            ]);
+        }
+        else{
+            return response()->json([
+                'status' => false,
+                'massage' => 'Not Found',
+
+            ]);
+        }
+    }
 
 
     public function CreateTenant(Request $request)
@@ -40,7 +61,7 @@ class TenantController extends Controller
     }
     else
     {
-        
+
         $tenant->image='';
     }
 
