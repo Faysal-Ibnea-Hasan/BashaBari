@@ -43,6 +43,10 @@ class OwnerController extends Controller
             ]);
         }
     }
+    public function GetOwnerImage($image){
+        $path = public_path('uploads/owners/'.$image);
+        return response()->file($path);
+    }
 
 
     public function CreateOwner(Request $request)
