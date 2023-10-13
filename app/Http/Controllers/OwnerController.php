@@ -19,7 +19,7 @@ class OwnerController extends Controller
     public function GetOwnerForm()
     {
         $dataBuildings = Buildings::get();
-        
+
         return view('create-owner',compact('dataBuildings'));
     }
 
@@ -33,12 +33,12 @@ class OwnerController extends Controller
        $owner->password = $request->password;
        $owner->nid = $request->nid;
     //    $owner->building_Id = $request->building_Id;
-       if($request->building_Id){
-        $owner->building_Id = $request->building_Id;
-       }
-       else{
-        return $request;
-       }
+    //    if($request->building_Id){
+    //     $owner->building_Id = $request->building_Id;
+    //    }
+    //    else{
+    //     return $request;
+    //    }
     //    $owner->image = $request->image;
     if($request->hasfile('image'))
     {
@@ -49,7 +49,7 @@ class OwnerController extends Controller
     }
     else
     {
-       
+
        $owner->image = '';
     }
 
@@ -57,8 +57,8 @@ class OwnerController extends Controller
        return redirect()->route('owner.table');
     }
 
-    
-    
+
+
     public function GetOwnerUpdateForm(Request $request)
     {
         $data = Owners::find($request->id);
@@ -82,7 +82,7 @@ class OwnerController extends Controller
         else{
             $data->nid = $data->nid;
         }
-       $data->building_Id = $request->input("building_Id");
+    //    $data->building_Id = $request->input("building_Id");
     //    $data->image = $request->input("image");
     if($request->hasfile('image'))
     {
@@ -91,7 +91,7 @@ class OwnerController extends Controller
         {
             File::delete($destination);
         }
-        
+
         $file = $request->file('image');
         $filename = time() . '.' . $request->image->extension();
         $file->move('uploads/owners/' , $filename);
@@ -99,11 +99,11 @@ class OwnerController extends Controller
     }
     else
     {
-        
+
         $data->image=$data->image;
     }
 
-    
+
        $data->update();
        return redirect()->route('owner.table');
     }
@@ -113,7 +113,7 @@ class OwnerController extends Controller
     {
         $data = Owners::find($id);
         $data->delete();
-        
+
 
         return redirect()->route('owner.table');
     }

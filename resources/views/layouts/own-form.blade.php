@@ -49,7 +49,18 @@
 
                     <option name="flat_Id" value="flat_Id" >Select</option>
                     @foreach ($dataFlats as $key=>$data)
-                    <option name="flat_Id" value="{{ $data->flat_Id }}" >{{ $data->unit_name }}</option>
+                    <option name="flat_Id" value="{{ $data->id }}" >{{ $data->unit_name }}</option>
+
+                    @endforeach
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Building Name</label>
+                  <select class="form-control" name="building_Id" id="building_Id">
+
+                    <option name="building_Id" value="building_Id" >Select</option>
+                    @foreach ($dataBuildings as $key=>$data)
+                    <option name="building_Id" value="{{ $data->id }}" >{{ $data->name }}</option>
 
                     @endforeach
                   </select>

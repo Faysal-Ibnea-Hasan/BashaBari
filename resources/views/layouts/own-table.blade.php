@@ -80,7 +80,7 @@
                       <td>{{$key+1}}</td>
                       <td>{{$owns->Owners->name}}</td>
                       <td>{{$owns->Flats->unit_name ?? "No Flat Assigned"}}</td>
-                      <td>{{$owns->Owners->Buildings->name ?? "No Building Assigned"}}</td>
+                      <td>{{$owns->Buildings->name ?? "No Building Assigned"}}</td>
 
 
 

@@ -20,9 +20,9 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          
+
           <div class="col-md-6">
-            
+
             <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title">Create Owner</h3>
@@ -54,26 +54,26 @@
                       <input type="password" name="password" class="form-control"  placeholder="Enter Password">
                     </div>
                   </div>
-                    
-                  <div class="row">
 
-                    
+                  {{-- <div class="row">
+
+
                     <div class="form-group w-50 px-1">
                     <label for="exampleInputPassword1">Building Name</label>
                     <select class="form-control" name="building_Id" id="building_Id">
-                      
+
                       <option name="building_Id" value="building_Id" >Select</option>
                       @foreach ($dataBuildings as $key=>$data)
                       <option name="building_Id" value="{{ $data->building_Id }}" >{{ $data->name }}</option>
-            
+
                       @endforeach
 
-                      
-                      
+
+
                     </select>
-                  </div>
-                
-                
+                  </div> --}}
+
+
                   <div class="form-group w-50">
                     <label for="exampleInputPassword1">NID</label>
                     <input type="text" name="nid" class="form-control"  placeholder="Enter NID">
@@ -98,26 +98,26 @@
                     </div>
                   </div>
                 </div>
-                  
-                  
+
+
                 </div>
                 <!-- /.card-body -->
-                
+
                 <div class="card-footer">
                   <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </div>
               </form>
             </div>
-            
+
 
           </div>
-          
-    
-        
-      </div><!-- /.container-fluid -->
-      
-    </section>
-    
 
-  
+
+
+      </div><!-- /.container-fluid -->
+
+    </section>
+
+
+
 </div>

@@ -9,4 +9,5 @@ class Buildings extends Model
 {
     use HasFactory;
     protected $table = 'tbl_buildings';
+    
 }

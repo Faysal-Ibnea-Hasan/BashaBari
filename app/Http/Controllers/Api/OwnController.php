@@ -20,6 +20,16 @@ class OwnController extends Controller
             'data' => $data
         ]);
     }
+    public function GetAssign($owner_Id)
+    {
+        // $data = $id?Owners::find($id):Owners::with('Buildings');
+        $data = Owns::where('owner_Id','=',$owner_Id)->get();
+        return response()->json([
+            'status' => true,
+            'massage' => 'success',
+            'data' => $data
+        ]);
+    }
 
 
     public function CreateOwn(Request $request)

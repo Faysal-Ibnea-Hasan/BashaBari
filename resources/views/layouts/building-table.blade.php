@@ -15,16 +15,16 @@
   <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-  
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
   <!-- Navbar -->
-  
+
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  
+
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -50,8 +50,8 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            
-            
+
+
 
             <div class="card">
               <div class="card-header">
@@ -63,39 +63,39 @@
                   <thead>
                   <tr>
                     <th>S.N</th>
-                    <th>Building ID</th>
+                    
                     <th>Building's Name</th>
                     <th>Address</th>
                     <th>Developed By</th>
                     <th>Developed Date</th>
                     <th colspan="2">Action</th>
-                    
-                    
-                    
-                    
-                    
+
+
+
+
+
                   </tr>
                   </thead>
                   <tbody>
                     @foreach ($data as $key => $buildings)
-                        
+
                     <tr>
                       <td>{{$key+1}}</td>
-                      <td>{{$buildings->building_Id}}</td>
+
                       <td>{{$buildings->name}}</td>
                       <td>{{$buildings->address}}</td>
                       <td>{{$buildings->developer}}</td>
                       <td>{{$buildings->date}}</td>
-                      
-                      
-                      
-                      
+
+
+
+
                       <td><a href="{{Route("building.form.update",['id' => $buildings->id])}}"><button type="button" class="btn btn-block btn-primary rounded-pill">Update</button></a></td>
                       <td><a href="{{Route("building.delete",['id' => $buildings->id])}}"><button type="button" class="btn btn-block btn-danger rounded-pill">Delete</button></a></td>
                     </tr>
                     @endforeach
-                  
-                  
+
+
                   </tbody>
                   {{-- <tfoot>
                   <tr>
@@ -121,7 +121,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
+
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">

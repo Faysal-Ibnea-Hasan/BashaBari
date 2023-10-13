@@ -15,16 +15,16 @@
   <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-  
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
   <!-- Navbar -->
-  
+
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  
+
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -50,8 +50,8 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            
-            
+
+
 
             <div class="card">
               <div class="card-header">
@@ -68,16 +68,16 @@
                     <th>Address</th>
                     <th>Password</th>
                     <th>NID</th>
-                    <th>Building Name</th>
+
                     <th>Image</th>
                     <th colspan="2">Action</th>
-                    
-                    
+
+
                   </tr>
                   </thead>
                   <tbody>
                     @foreach ($data as $key=> $owners)
-                        
+
                     <tr>
                       <td>{{$key+1}}</td>
                       <td>{{$owners->name}}</td>
@@ -85,17 +85,17 @@
                       <td>{{$owners->address}}</td>
                       <td>{{$owners->password}}</td>
                       <td>{{$owners->nid}}</td>
-                      <td>{{$owners->Buildings->name ?? "No Building"}}</td>
+                     
                       <td>
                         <img src="{{asset('uploads/owners/'.$owners->image)}}" width="100px" height="100px" alt="Image">
                       </td>
-                      
+
                       <td><a href="{{Route("owner.form.update",['id' => $owners->id])}}"><button type="button" class="btn btn-block btn-primary rounded-pill">Update</button></a></td>
                       <td><a href="{{Route("owner.delete",['id' => $owners->id])}}"><button type="button" class="btn btn-block btn-danger rounded-pill">Delete</button></a></td>
                     </tr>
                     @endforeach
-                  
-                  
+
+
                   </tbody>
                   {{-- <tfoot>
                   <tr>
@@ -121,7 +121,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
+
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">

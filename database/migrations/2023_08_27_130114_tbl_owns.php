@@ -14,17 +14,18 @@ return new class extends Migration
         Schema::create('tbl_owns', function (Blueprint $table) {
             $table->id();
 
-            
-            
+
+
             $table->string('owner_Id')->nullable();
             $table->string('flat_Id')->nullable();
-            
-            
-           
-            
-            
-            
-            
+            $table->string('building_Id')->nullable();
+
+
+
+
+
+
+
 
 
             $table->timestamps();
