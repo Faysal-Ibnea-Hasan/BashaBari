@@ -21,11 +21,11 @@ class BuildingController extends Controller
             'data' => $data
         ]);
     }
-    public function GetBuildingOwner($building_Id)
+    public function GetBuildingOwner($owner_Id)
     {
         // $data = $id?Owners::find($id):Owners::with('Buildings');
-        $data = Buildings::find($building_Id);
-        dd($data);
+        $data = Buildings::where('owner_Id','=',$owner_Id)->get();
+
         return response()->json([
             'status' => true,
             'massage' => 'success',
@@ -39,6 +39,7 @@ class BuildingController extends Controller
        $building = new Buildings();
 
        $building->name = $request->name;
+       $building->owner_Id = $request->owner_Id;
        $building->address = $request->address;
        $building->developer = $request->developer;
        $building->building_Id = Helper::Generator(new Buildings,'building_Id',4,'Building#');
@@ -76,6 +77,7 @@ class BuildingController extends Controller
         $data = Buildings::find($id);
 
        $data->name = $request->input("name");
+       $data->owner_Id = $request->input("owner_Id");
        $data->address = $request->input("address");
        $data->developer = $request->input("developer");
        $data->date = $request->input("date");

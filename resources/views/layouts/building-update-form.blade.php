@@ -20,9 +20,9 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          
+
           <div class="col-md-6">
-            
+
             <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title">Update Building</h3>
@@ -32,7 +32,9 @@
               <form autocomplete="off" action="{{Route('building.form.update.put',['id'=>$data->id])}}" method="POST">
                 @csrf
                 @method('PUT')
+                
                 <div class="card-body">
+
                   <div class="form-group">
                     <label for="exampleInputEmail1">Building's Name</label>
                     <input type="text" name="name" value="{{$data->name}}" class="form-control"  placeholder="Enter Building's Name">
@@ -41,7 +43,7 @@
                     <label for="exampleInputPassword1">Address</label>
                     <input type="text" name="address" value="{{$data->address}}" class="form-control"  placeholder="Enter Address">
                   </div>
-                  
+
                   <div class="form-group">
                     <label for="exampleInputPassword1">Developed By</label>
                     <input type="text" name="developer" value="{{$data->developer}}" class="form-control"  placeholder="Developed By">
@@ -50,9 +52,9 @@
                     <label for="date">Date:</label>
                     <input type="date" value="{{$data->date}}" name="date" id="date"/>
                   </div>
-                  
-                  
-                  
+
+
+
                   {{-- <div class="form-group">
                     <label for="exampleInputFile">File input</label>
                     <div class="input-group">
@@ -65,8 +67,8 @@
                       </div>
                     </div>
                   </div> --}}
-                  
-                  
+
+
                 </div>
                 <!-- /.card-body -->
 
@@ -75,12 +77,12 @@
                 </div>
               </form>
             </div>
-            
+
 
           </div>
-          
+
         </div>
-        
+
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->

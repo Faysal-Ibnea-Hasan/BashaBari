@@ -29,11 +29,13 @@ class BuildingController extends Controller
        $building->name = $request->name;
        $building->address = $request->address;
        $building->developer = $request->developer;
+       $building->owner_Id = $request->owner_Id;
+
        $building->building_Id = Helper::Generator(new Buildings,'building_Id',4,'Building#');
        $building->date = $request->date;
-       
-       
-       
+
+
+
 
        $res = $building->save();
        return redirect()->route('building.table');
@@ -50,27 +52,28 @@ class BuildingController extends Controller
         return redirect()->route('building.form.create');
 
     }
-    
+
     public function GetBuildingUpdateForm(Request $request)
     {
         $data = Buildings::find($request->id);
-        
+        $dataOwners = Owners::get();
 
-        return view('update-building', compact('data'));
+
+        return view('update-building', compact('data','dataOwners'));
     }
 
     public function UpdateBuilding(Request $request,$id)
     {
-        $data = Buildings::find($id);
-
+       $data = Buildings::find($id);
+       $data->owner_Id = $request->input("owner_Id");
        $data->name = $request->input("name");
        $data->address = $request->input("address");
        $data->developer = $request->input("developer");
        $data->date = $request->input("date");
-       
-       
-       
-       
+
+
+
+
 
        $data->update();
 
@@ -82,7 +85,7 @@ class BuildingController extends Controller
     {
         $data = Buildings::find($id);
         $data->delete();
-        
+
 
         return redirect()->route('building.table');
     }
