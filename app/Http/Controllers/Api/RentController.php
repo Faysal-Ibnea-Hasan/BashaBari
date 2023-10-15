@@ -28,10 +28,12 @@ class RentController extends Controller
 
        $rent->tenant_Id = $request->tenant_Id;
        $rent->flat_Id = $request->flat_Id;
+       $rent->owner_Id = $request->owner_Id;
+       $rent->building_Id = $request->building_Id;
 
 
        $res = $rent->save();
-       
+
        return response()->json([
         'status' => true,
         'massage' => 'Rent created successfully',
@@ -46,6 +48,8 @@ class RentController extends Controller
 
        $data->tenant_Id = $request->input("tenant_Id");
        $data->flat_Id = $request->input("flat_Id");
+       $data->owner_Id = $request->input("owner_Id");
+       $data->building_Id = $request->input("building_Id");
 
 
        $data->update();

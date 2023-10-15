@@ -20,9 +20,9 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          
+
           <div class="col-md-6">
-            
+
             <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title">Rent Tenant</h3>
@@ -31,44 +31,55 @@
               <!-- form start -->
               <form autocomplete="off" action="{{Route('rent.form.post')}}" method="POST">
                 @csrf
-                
+
                 <div class="form-group">
                   <label for="exampleInputPassword1">Tenant's Name</label>
                   <select class="form-control" name="tenant_Id" id="tenant_Id">
-                    
+
                     <option name="tenant_Id" value="tenant_Id" >Select</option>
                     @foreach ($dataTenants as $key=>$data)
                     <option name="tenant_Id" value="{{ $data->id }}" >{{ $data->name }}</option>
-          
+
+                    @endforeach
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Owner's Name</label>
+                  <select class="form-control" name="owner_Id" id="owner_Id">
+
+                    <option name="owner_Id" value="owner_Id" >Select</option>
+                    @foreach ($dataOwners as $key=>$data)
+                    <option name="owner_Id" value="{{ $data->id }}" >{{ $data->name }}</option>
+
                     @endforeach
                   </select>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Building Name</label>
-                  <select class="form-control" name="flat_Id" id="flat_Id">
-                    
-                    <option name="flat_Id" value="flat_Id" >Select</option>
-                    @foreach ($dataFlats as $key=>$data)
-                    <option name="flat_Id" value="{{ $data->flat_Id }}" >{{ $data->Buildings->name ?? "No building" }}</option>
-          
+                  <select class="form-control" name="building_Id" id="building_Id">
+
+                    <option name="building_Id" value="building_Id" >Select</option>
+                    @foreach ($dataBuildings as $key=>$data)
+                    <option name="building_Id" value="{{ $data->building_Id }}" >{{ $data->name ?? "No building" }}</option>
+
                     @endforeach
                   </select>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Unit Name</label>
                   <select class="form-control" name="flat_Id" id="flat_Id">
-                    
+
                     <option name="flat_Id" value="flat_Id" >Select</option>
                     @foreach ($dataFlats as $key=>$data)
                     <option name="flat_Id" value="{{ $data->flat_Id }}" >{{ $data->unit_name }}</option>
-          
+
                     @endforeach
                   </select>
                 </div>
-                
-                      
-                     
-                  
+
+
+
+
                   {{-- <div class="form-group">
                     <label for="exampleInputFile">File input</label>
                     <div class="input-group">
@@ -81,8 +92,8 @@
                       </div>
                     </div>
                   </div> --}}
-                  
-                  
+
+
                 </div>
                 <!-- /.card-body -->
 
@@ -91,12 +102,12 @@
                 </div>
               </form>
             </div>
-            
+
 
           </div>
-          
+
         </div>
-        
+
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->

@@ -14,17 +14,19 @@ return new class extends Migration
         Schema::create('tbl_rents', function (Blueprint $table) {
             $table->id();
 
-            
-            
+
+
             $table->string('tenant_Id')->nullable();
             $table->string('flat_Id')->nullable();
-            
-            
-           
-            
-            
-            
-            
+            $table->string('owner_Id')->nullable();
+            $table->string('building_Id')->nullable();
+
+
+
+
+
+
+
 
 
             $table->timestamps();

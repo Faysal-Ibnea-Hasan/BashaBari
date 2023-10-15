@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Tenants;
 use Illuminate\Support\Facades\File;
+use App\Helpers\Helper;
 
 class TenantController extends Controller
 {
@@ -29,6 +30,7 @@ class TenantController extends Controller
        $tenant->address = $request->address;
        $tenant->password = $request->password;
        $tenant->nid = $request->nid;
+       $tenant->tenant_Id = Helper::Generator(new Tenants,'tenant_Id',4,'Tenant#');
     //    $tenant->image = $request->image;
     if($request->hasfile('image'))
     {
@@ -39,7 +41,7 @@ class TenantController extends Controller
     }
     else
     {
-        
+
         $tenant->image='';
     }
 
@@ -65,6 +67,7 @@ class TenantController extends Controller
        $data->address = $request->input("address");
        $data->password = $request->input("password");
        $data->nid = $request->input("nid");
+
     //    $data->image = $request->input("image");
     if($request->hasfile('image')){
         $destination = 'uploads/tenants/'.$data->image;
@@ -79,8 +82,8 @@ class TenantController extends Controller
         $data->image = $filename;
     }
     else{
-        return $request;
-        $data->image='';
+
+        $data->image=$data->image;
     }
 
 

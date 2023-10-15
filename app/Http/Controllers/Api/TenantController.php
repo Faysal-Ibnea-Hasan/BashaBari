@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
+use App\Helpers\Helper;
 
 use Illuminate\Http\Request;
 use App\Models\Tenants;
@@ -51,6 +52,7 @@ class TenantController extends Controller
        $tenant->address = $request->address;
        $tenant->password = $request->password;
        $tenant->nid = $request->nid;
+       $tenant->tenant_Id = Helper::Generator(new Tenants,'tenant_Id',4,'Tenant#');
     //    $tenant->image = $request->image;
     if($request->hasfile('image'))
     {

@@ -63,10 +63,10 @@
                   <thead>
                   <tr>
                     <th>S.N</th>
+                    <th>Owner's Name</th>
                     <th>Tenant's Name</th>
                     <th>Unit Name</th>
                     <th>Building Name</th>
-                    <th>Rent Value</th>
                     <th colspan="2">Action</th>
 
 
@@ -79,10 +79,10 @@
 
                     <tr>
                       <td>{{$key+1}}</td>
+                      <td>{{$rents->Owners->name}}</td>
                       <td>{{$rents->Tenants->name}}</td>
                       <td>{{$rents->Flats->unit_name}}</td>
-                      <td>{{$rents->Flats->Buildings->name}}</td>
-                      <td>{{$rents->Flats->rent_value}}</td>
+                      <td>{{$rents->Buildings->name}}</td>
 
 
 
