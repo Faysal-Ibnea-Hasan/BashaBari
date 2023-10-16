@@ -14,21 +14,43 @@ class TenantController extends Controller
     {
         // $data = $id?Owners::find($id):Owners::with('Buildings');
         $data = $id?Tenants::find($id):Tenants::all();
+        $imagePath = 'uploads/tenants/' . $data->image; // 'uploads/tenants/' is the path and  $data->image is for sending image endpoint to
+
+        $imageUrl = asset($imagePath);
+
+
+
         return response()->json([
             'status' => true,
             'massage' => 'success',
-            'data' => $data
+            'data' => $data,
+            'imageUrl' => $imageUrl
         ]);
+    }
+    public function GetTenantImage($image){
+        $imageUrl =asset($image);
+        $data = [
+            'image_url' => $imageUrl
+        ];
+        return response()->json($data);
+
     }
     public function GetTenantListByTenantId($tenant_Id)
     {
         // $data = $id?Owners::find($id):Owners::with('Buildings');
         $data = Tenants::where('tenant_Id','=',$tenant_Id)->get();
-        
+        // $imagePath = $data->image;
+
+        // $imageUrl = asset($imagePath);
+
+
         return response()->json([
             'status' => true,
             'massage' => 'success',
             'data' => $data
+            // 'imageUrl' => $imageUrl
+
+
         ]);
     }
     public function CheckTenant(Request $request){

@@ -74,6 +74,7 @@ Route::controller(RentalController::class)->group(function () {
     // =============================Tenant API========================================
 Route::controller(TenantController::class)->group(function () {
     Route::get('Api/Tenant/Table/{id?}', 'GetTenantList');
+    Route::get('Api/Tenant/Image/{image}', 'GetTenantImage');
     Route::get('Api/Tenant/TableById/{tenant_Id}', 'GetTenantListByTenantId');
     Route::post('Api/Tenant/Check', 'CheckTenant');
     Route::post('Api/Tenant/Create_Form_Post', 'CreateTenant');
