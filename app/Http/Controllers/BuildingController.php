@@ -31,7 +31,7 @@ class BuildingController extends Controller
        $building->developer = $request->developer;
        $building->owner_Id = $request->owner_Id;
 
-       $building->building_Id = Helper::Generator(new Buildings,'building_Id',4,'Building#');
+       $building->building_Id = Helper::Generator(new Buildings,'building_Id',4,'Building');
        $building->date = $request->date;
 
 

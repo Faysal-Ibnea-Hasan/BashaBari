@@ -30,7 +30,7 @@ class RentalController extends Controller
        $rental = new Rentals();
 
        $rental->flat_Id = $request->flat_Id;
-       $rental->rental_Id = Helper::Generator(new Flats,'rental_Id',4,'Rental#');
+       $rental->rental_Id = Helper::Generator(new Flats,'rental_Id',4,'Rental');
        $rental->status = $request->status;
 
 

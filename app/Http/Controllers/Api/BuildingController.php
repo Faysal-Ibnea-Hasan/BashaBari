@@ -42,7 +42,7 @@ class BuildingController extends Controller
        $building->owner_Id = $request->owner_Id;
        $building->address = $request->address;
        $building->developer = $request->developer;
-       $building->building_Id = Helper::Generator(new Buildings,'building_Id',4,'Building#');
+       $building->building_Id = Helper::Generator(new Buildings,'building_Id',4,'Building');
        $building->date = $request->date;
 
 
@@ -60,7 +60,7 @@ class BuildingController extends Controller
 
         $flat->unit_name = $request->unit_name;
         $flat->owner_Id = $request->owner_Id;
-        $flat->flat_Id = Helper::Generator(new Flats,'flat_Id',4,'Flat#');
+        $flat->flat_Id = Helper::Generator(new Flats,'flat_Id',4,'Flat');
 
         $res = $flat->save();
         return response()->json([

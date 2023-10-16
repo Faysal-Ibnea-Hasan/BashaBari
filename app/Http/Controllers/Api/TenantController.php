@@ -20,6 +20,17 @@ class TenantController extends Controller
             'data' => $data
         ]);
     }
+    public function GetTenantListByTenantId($tenant_Id)
+    {
+        // $data = $id?Owners::find($id):Owners::with('Buildings');
+        $data = Tenants::where('tenant_Id','=',$tenant_Id)->get();
+        
+        return response()->json([
+            'status' => true,
+            'massage' => 'success',
+            'data' => $data
+        ]);
+    }
     public function CheckTenant(Request $request){
         $mobile = $request->mobile;
         $password = $request->password;
@@ -52,7 +63,7 @@ class TenantController extends Controller
        $tenant->address = $request->address;
        $tenant->password = $request->password;
        $tenant->nid = $request->nid;
-       $tenant->tenant_Id = Helper::Generator(new Tenants,'tenant_Id',4,'Tenant#');
+       $tenant->tenant_Id = Helper::Generator(new Tenants,'tenant_Id',4,'Tenant');
     //    $tenant->image = $request->image;
     if($request->hasfile('image'))
     {

@@ -38,7 +38,7 @@
 
                     <option name="tenant_Id" value="tenant_Id" >Select</option>
                     @foreach ($dataTenants as $key=>$data)
-                    <option name="tenant_Id" value="{{ $data->id }}" >{{ $data->name }}</option>
+                    <option name="tenant_Id" value="{{ $data->tenant_Id }}" >{{ $data->name }}</option>
 
                     @endforeach
                   </select>
@@ -71,7 +71,7 @@
 
                     <option name="flat_Id" value="flat_Id" >Select</option>
                     @foreach ($dataFlats as $key=>$data)
-                    <option name="flat_Id" value="{{ $data->flat_Id }}" >{{ $data->unit_name }}</option>
+                    <option name="flat_Id" value="{{ $data->flat_Id }}" >{{ $data->unit_name }},{{$data->building_Id}}</option>
 
                     @endforeach
                   </select>

@@ -9,7 +9,7 @@ use App\Helpers\Helper;
 
 class RentalController extends Controller
 {
-    
+
 
 
     public function GetRentalList()
@@ -20,7 +20,7 @@ class RentalController extends Controller
     }
     public function GetRentalForm()
     {
-        
+
         $dataFlats = Flats::get();
         return view('create-rental',compact('dataFlats'));
     }
@@ -30,18 +30,18 @@ class RentalController extends Controller
        $rental = new Rentals();
 
        $rental->flat_Id = $request->flat_Id;
-       $rental->rental_Id = Helper::Generator(new Flats,'rental_Id',4,'Rental#');
+       $rental->rental_Id = Helper::Generator(new Flats,'rental_Id',4,'Rental');
        $rental->status = $request->status;
-       
+
 
        $res = $rental->save();
        return redirect()->route('rental.table');
     }
-    
+
     public function GetRentalUpdateForm(Request $request)
     {
         $data = Rentals::find($request->id);
-        
+
         $dataFlats = Flats::get();
 
         return view('update-rental', compact('data', 'dataFlats'));
@@ -51,10 +51,10 @@ class RentalController extends Controller
     {
         $data = Rentals::find($id);
 
-       
+
        $data->flat_Id = $request->input("flat_Id");
        $data->status = $request->input("status");
-       
+
 
        $data->update();
 
@@ -66,7 +66,7 @@ class RentalController extends Controller
     {
         $data = Rentals::find($id);
         $data->delete();
-        
+
 
         return redirect()->route('rental.table');
     }

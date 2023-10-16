@@ -17,26 +17,26 @@ class FlatController extends Controller
         // $data = $id?Owners::find($id):Owners::with('Buildings');
         $data = Flats::get();
         return view('table-flat',compact('data'));
-        
+
     }
     public function GetFlatImage($id)
     {
 
         // $data = $id?Owners::find($id):Owners::with('Buildings');
-        
+
         $data = Flats::where('id',$id)->get();
-        
+
         // $myarray = json_decode($data, true);
-        
+
         return view('image-flat',compact('data'));
-        
+
     }
     // public function GetDetails(Request $request)
     // {
     //     $data = Flats::where('id', $request->id)->get();
     //     return view('details-flat',compact('data'));
     // }
-        
+
     public function GetDetails($id)
     {
         $data = Flats::find($id);
@@ -54,20 +54,20 @@ class FlatController extends Controller
     {
     //    $this->validate($request,[
 
-         
+
     //      'image' => 'required',
     //      'image.*' => 'image|mimes:jpg,jpeg,png,gif,svg|max:5120'
     //    ]);
-    
-       
-    
+
+
+
        $flat = new Flats();
 
        $flat->unit_name = $request->unit_name;
        $flat->building_Id = $request->building_Id;
        $flat->floor = $request->floor;
        $flat->area = $request->area;
-       $flat->flat_Id = Helper::Generator(new Flats,'flat_Id',4,'Flat#');
+       $flat->flat_Id = Helper::Generator(new Flats,'flat_Id',4,'Flat');
        $flat->room = $request->room;
        $flat->washroom = $request->washroom;
        $flat->balconi = $request->balconi;
@@ -83,30 +83,30 @@ class FlatController extends Controller
             $data[] = $filename;
             // $flat->image = $filename;
             $flat->image = json_encode($data);
-            
-            
+
+
         }
     }
-       
+
     else
     {
         $flat->image='';
     }
-    
+
        $res=$flat->save();
     return redirect()->route('flat.table');
  }
 
-       
-       
-       
 
-    
+
+
+
+
     public function GetFlatUpdateForm(Request $request)
     {
         $data = Flats::find($request->id);
         $dataBuilding = Buildings::get();
-        
+
 
         return view('update-flat', compact('data', 'dataBuilding'));
     }
@@ -119,7 +119,7 @@ class FlatController extends Controller
         $data->building_Id = $request->input('building_Id');
         $data->floor = $request->input('floor');
         $data->area = $request->input('area');
-        
+
         $data->room = $request->input('room');
         $data->washroom = $request->input('washroom');
         $data->balconi = $request->input('balconi');
@@ -134,7 +134,7 @@ class FlatController extends Controller
             }
             foreach($request->file('image') as $file)
             {
-    
+
                 // $file = $request->file('image');
                 $filename = $file->extension();
                 $file->move('uploads/flats/' , $filename);
@@ -143,8 +143,8 @@ class FlatController extends Controller
                 $data->image = json_encode($datas);
             }
         }
-                
-            
+
+
         else
         {
             $data->image=$data->image;
@@ -152,11 +152,11 @@ class FlatController extends Controller
         $data->update();
         return redirect()->route('flat.table');
     }
-            
-       
-       
-       
-       
+
+
+
+
+
 
 
 
@@ -165,7 +165,7 @@ class FlatController extends Controller
     {
         $data = Flats::find($id);
         $data->delete();
-        
+
 
         return redirect()->route('flat.table');
     }

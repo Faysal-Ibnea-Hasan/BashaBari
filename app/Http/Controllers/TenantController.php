@@ -30,7 +30,7 @@ class TenantController extends Controller
        $tenant->address = $request->address;
        $tenant->password = $request->password;
        $tenant->nid = $request->nid;
-       $tenant->tenant_Id = Helper::Generator(new Tenants,'tenant_Id',4,'Tenant#');
+       $tenant->tenant_Id = Helper::Generator(new Tenants,'tenant_Id',4,'Tenant');
     //    $tenant->image = $request->image;
     if($request->hasfile('image'))
     {
