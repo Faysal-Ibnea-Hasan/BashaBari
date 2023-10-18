@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Flats;
 use App\Models\Buildings;
+use App\Models\Owners;
 use App\Helpers\Helper;
 use Illuminate\Support\Facades\File;
 
@@ -47,7 +48,8 @@ class FlatController extends Controller
     public function GetFlatForm()
     {
         $dataBuilding = Buildings::get();
-        return view('create-flat', compact('dataBuilding'));
+        $dataOwner = Owners::get();
+        return view('create-flat', compact('dataBuilding', 'dataOwner'));
     }
 
     public function CreateFlat(Request $request)
@@ -62,7 +64,7 @@ class FlatController extends Controller
 
 
        $flat = new Flats();
-
+       $flat->owner_Id = $request->owner_Id;
        $flat->unit_name = $request->unit_name;
        $flat->building_Id = $request->building_Id;
        $flat->floor = $request->floor;
@@ -106,9 +108,10 @@ class FlatController extends Controller
     {
         $data = Flats::find($request->id);
         $dataBuilding = Buildings::get();
+        $dataOwner = Owners::get();
 
 
-        return view('update-flat', compact('data', 'dataBuilding'));
+        return view('update-flat', compact('data', 'dataBuilding', 'dataOwner'));
     }
 
     public function UpdateFlat(Request $request,$id)
@@ -119,7 +122,7 @@ class FlatController extends Controller
         $data->building_Id = $request->input('building_Id');
         $data->floor = $request->input('floor');
         $data->area = $request->input('area');
-
+        $flat->owner_Id = $request->input('owner_Id');
         $data->room = $request->input('room');
         $data->washroom = $request->input('washroom');
         $data->balconi = $request->input('balconi');

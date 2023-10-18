@@ -88,6 +88,7 @@ class FlatController extends Controller
 
         );
        }
+       $flat->owner_Id = $request->owner_Id;
        $flat->unit_name = $request->unit_name;
        $flat->building_Id = $request->building_Id;
        $flat->floor = $request->floor;

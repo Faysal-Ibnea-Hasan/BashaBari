@@ -20,9 +20,9 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          
+
           <div class="col-md-6">
-            
+
             <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title">Update Flat</h3>
@@ -62,40 +62,54 @@
                     <input type="text" name="rent_value" value="{{$data->balconi}}" class="form-control" placeholder="Enter Rent Amount">
                   </div>
                   <div class="form-group">
+                    <label for="exampleInputPassword1">Owner Name</label>
+                    <select class="form-control" name="owner_Id" id="owner_Id">
+
+                        <option name="owner_Id" value="owner_Id">Select</option>
+                        @foreach ($dataOwner as $key => $data)
+                            <option name="owner_Id" value="{{ $data->owner_Id }}">
+                                {{ $data->name }}</option>
+                        @endforeach
+
+
+
+                    </select>
+                </div>
+                  <div class="form-group">
                     <label for="exampleInputPassword1">Building Name</label>
                     <select class="form-control" name="building_Id" id="building_Id">
-                      
+
                       {{-- <option name="building_Id" value="building_Id" >Select</option> --}}
                       @foreach ($dataBuilding as $key=>$data)
                       <option name="building_Id" value="{{ $data->building_Id }}" >{{ $data->name }}</option>
-            
+
                       @endforeach
 
-                      
-                     
+
+
                       </select>
                   </div>
-                  
+
                   {{-- <div class="form-group">
                     <label for="exampleInputPassword1">Image</label>
                     <input type="text" name="image" value="{{$data->image}}" class="form-control"  placeholder="Image">
                   </div> --}}
-                  
+
                   <div class="form-group">
                     <label for="exampleInputFile">Image</label>
                     <div class="input-group">
                       <div class="custom-file">
                         <input type="file" name="image[]" multiple value="{{$data->image}}" class="custom-file-input" id="exampleInputFile">
                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                        
+
                       </div>
                       <div class="input-group-append">
                         <span class="input-group-text">Upload</span>
                       </div>
                     </div>
                   </div>
-                  
-                  
+
+
                 </div>
                 <!-- /.card-body -->
 
@@ -104,12 +118,12 @@
                 </div>
               </form>
             </div>
-            
+
 
           </div>
-          
+
         </div>
-        
+
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
