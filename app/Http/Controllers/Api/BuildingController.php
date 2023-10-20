@@ -32,6 +32,31 @@ class BuildingController extends Controller
             'data' => $data
         ]);
     }
+    public function GetBuildingByArea(Request $request)
+    {
+        $area = $request->area;
+        // $data = $id?Owners::find($id):Owners::with('Buildings');
+        $data = Buildings::where('area','=',$area)->get();
+        $dataAll= Buildings::get();
+        if ($area)
+        {
+            return response()->json([
+            'status' => true,
+            'massage' => 'Found Success',
+            'data' => $data
+            ]);
+        }
+
+        else if(!$area){
+            return response()->json([
+                'status' => true,
+                'massage' => 'Not Found',
+                'data' => $dataAll
+                ]);
+        }
+
+
+    }
 
 
     public function CreateBuilding(Request $request)
@@ -44,6 +69,10 @@ class BuildingController extends Controller
        $building->developer = $request->developer;
        $building->building_Id = Helper::Generator(new Buildings,'building_Id',4,'Building');
        $building->date = $request->date;
+       $building->area = $request->area;
+       $building->city = $request->city;
+       $building->district = $request->district;
+       $building->postal_code = $request->postal_code;
 
 
 
@@ -81,6 +110,11 @@ class BuildingController extends Controller
        $data->address = $request->input("address");
        $data->developer = $request->input("developer");
        $data->date = $request->input("date");
+       $data->parking = $request->input("parking");
+       $data->area = $request->input("area");
+       $data->city = $request->input("city");
+       $data->district = $request->input("district");
+       $data->postal_code = $request->input("postal_code");
 
 
 

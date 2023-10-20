@@ -62,6 +62,73 @@
                   <label for="date">Date:</label>
                   <input type="date" name="date" id="date"/>
                 </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Area</label>
+                    <select class="form-control" name="area" id="area">
+
+                      <option name="area" value="Not Selected" >Select</option>
+
+                      <option name="area" value="Mirpur-1" >Mirpur-1</option>
+                      <option name="area" value="Mirpur-2" >Mirpur-2</option>
+                      <option name="area" value="Mirpur-6" >Mirpur-6</option>
+                      <option name="area" value="Mirpur-7" >Mirpur-7</option>
+                      <option name="area" value="Mirpur-10" >Mirpur-10</option>
+                      <option name="area" value="Mirpur-11" >Mirpur-11</option>
+                      <option name="area" value="Mirpur-12" >Mirpur-12</option>
+                      <option name="area" value="Mirpur-13" >Mirpur-13</option>
+                      <option name="area" value="Mirpur-14" >Mirpur-14</option>
+
+
+                    </select>
+                  </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">City</label>
+                    <select class="form-control" name="city" id="city">
+
+                      <option name="city" value="Not Selected" >Select</option>
+
+                      <option name="city" value="Dhaka" >Dhaka</option>
+
+
+
+                    </select>
+                  </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">District</label>
+                    <select class="form-control" name="district" id="district">
+
+                      <option name="district" value="Not Selected" >Select</option>
+
+                      <option name="district" value="Dhaka" >Dhaka</option>
+
+
+
+                    </select>
+                  </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Postal Code</label>
+                    <select class="form-control" name="postal_code" id="postal_code">
+
+                      <option name="postal_code" value="Not Selected" >Select</option>
+
+                      <option name="postal_code" value="1216" >1216</option>
+
+
+
+                    </select>
+                  </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Parking Facility</label>
+                    <select class="form-control" name="parking" id="parking">
+
+                      <option name="parking" value="Not Selected" >Select</option>
+
+                      <option name="parking" value="Available" >Available</option>
+                      <option name="parking" value="Not Available" >Not Available</option>
+
+
+                    </select>
+                  </div>
 
 
 

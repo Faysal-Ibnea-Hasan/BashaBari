@@ -18,10 +18,19 @@ return new class extends Migration
 
             $table->string('name')->nullable();
             $table->string('owner_Id')->nullable();
-            $table->string('address')->nullable();
+
             $table->string('developer')->nullable();
             $table->string('building_Id')->nullable();
             $table->date('date')->nullable();
+            $table->string('parking')->nullable();
+
+            $table->string('area')->nullable();
+            $table->string('city')->nullable();
+            $table->string('district')->nullable();
+            $table->string('postal_code')->nullable();
+            $table->string('address')->nullable();
+
+
 
 
 

@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::controller(BuildingController::class)->group(function () {
     Route::get('Api/Building/Table/{id?}', 'GetBuildingList');
     Route::get('Api/Building/Owner/{owner_Id}', 'GetBuildingOwner');
+    Route::post('Api/Building/ByArea', 'GetBuildingByArea');
     Route::post('Api/Building/Create_Form_Post', 'CreateBuilding');
     Route::put('Api/Building/Updated/{id}', 'UpdateBuilding');
     Route::delete('Api/DeleteBuilding/{id}', 'DeleteBuilding');

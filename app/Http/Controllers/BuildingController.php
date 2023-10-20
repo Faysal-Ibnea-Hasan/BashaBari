@@ -30,6 +30,11 @@ class BuildingController extends Controller
        $building->address = $request->address;
        $building->developer = $request->developer;
        $building->owner_Id = $request->owner_Id;
+       $building->parking = $request->parking;
+       $building->area = $request->area;
+       $building->city = $request->city;
+       $building->district = $request->district;
+       $building->postal_code = $request->postal_code;
 
        $building->building_Id = Helper::Generator(new Buildings,'building_Id',4,'Building');
        $building->date = $request->date;
@@ -70,6 +75,11 @@ class BuildingController extends Controller
        $data->address = $request->input("address");
        $data->developer = $request->input("developer");
        $data->date = $request->input("date");
+       $data->parking = $request->input("parking");
+       $data->area = $request->input("area");
+       $data->city = $request->input("city");
+       $data->district = $request->input("district");
+       $data->postal_code = $request->input("postal_code");
 
 
 
