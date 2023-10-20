@@ -21,6 +21,16 @@ class BuildingController extends Controller
             'data' => $data
         ]);
     }
+    public function GetBuildingByBuilding_Id($building_Id)
+    {
+        // $data = $id?Owners::find($id):Owners::with('Buildings');
+        $data = Buildings::where('building_Id','=', $building_Id)->get();
+        return response()->json([
+            'status' => true,
+            'massage' => 'success',
+            'data' => $data
+        ]);
+    }
     public function GetBuildingOwner($owner_Id)
     {
         // $data = $id?Owners::find($id):Owners::with('Buildings');

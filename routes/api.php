@@ -29,6 +29,7 @@ Route::controller(BuildingController::class)->group(function () {
     Route::get('Api/Building/Table/{id?}', 'GetBuildingList');
     Route::get('Api/Building/Owner/{owner_Id}', 'GetBuildingOwner');
     Route::post('Api/Building/ByArea', 'GetBuildingByArea');
+    Route::get('Api/Building/ByBuilding_Id/{building_Id}', 'GetBuildingByBuilding_Id');
     Route::post('Api/Building/Create_Form_Post', 'CreateBuilding');
     Route::put('Api/Building/Updated/{id}', 'UpdateBuilding');
     Route::delete('Api/DeleteBuilding/{id}', 'DeleteBuilding');
