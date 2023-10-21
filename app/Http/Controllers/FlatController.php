@@ -74,6 +74,7 @@ class FlatController extends Controller
        $flat->washroom = $request->washroom;
        $flat->balconi = $request->balconi;
        $flat->rent_value = $request->rent_value;
+       $flat->status = $request->status;
        if($request->hasfile('image'))
     {
         foreach($request->file('image') as $file)
@@ -122,11 +123,12 @@ class FlatController extends Controller
         $data->building_Id = $request->input('building_Id');
         $data->floor = $request->input('floor');
         $data->area = $request->input('area');
-        $flat->owner_Id = $request->input('owner_Id');
+        $data->owner_Id = $request->input('owner_Id');
         $data->room = $request->input('room');
         $data->washroom = $request->input('washroom');
         $data->balconi = $request->input('balconi');
         $data->rent_value = $request->input('rent_value');
+        $data->status = $request->input('status');
         // $data->image = $request->input('image');
         if($request->hasfile('image'))
         {

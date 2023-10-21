@@ -79,6 +79,7 @@ class BuildingController extends Controller
        $building->developer = $request->developer;
        $building->building_Id = Helper::Generator(new Buildings,'building_Id',4,'Building');
        $building->date = $request->date;
+       $building->parking = $request->parking;
        $building->area = $request->area;
        $building->city = $request->city;
        $building->district = $request->district;

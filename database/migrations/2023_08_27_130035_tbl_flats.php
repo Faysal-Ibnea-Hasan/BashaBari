@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('tbl_flats', function (Blueprint $table) {
             $table->id();
 
-            
-            
+
+
             $table->string('unit_name')->nullable();
             $table->string('building_Id')->nullable();
             $table->string('floor')->nullable();
@@ -27,11 +27,12 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('flat_Id')->nullable();
             $table->string('owner_Id')->nullable();
-           
-            
-            
-            
-            
+            $table->string('status')->nullable();
+
+
+
+
+
 
 
             $table->timestamps();

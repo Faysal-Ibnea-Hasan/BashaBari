@@ -65,6 +65,7 @@ class FlatController extends Controller
     //     );
     // }
 
+
     public function CreateFlat(Request $request)
     {
     //    $this->validate($request,[
@@ -77,17 +78,21 @@ class FlatController extends Controller
 
 
        $flat = new Flats();
-       $data = Flats::Where('unit_name','=',$request->unit_name)->first();
-       $data1 = Flats::Where('building_Id','=',$request->building_Id)->first();
-       if($data && $data1){
-         return response()->json([
-            "status"=> false,
-            "massage"=> "Already Exists",
+    //    $data = Flats::Where('building_Id','=',$request->building_Id)->get();
+    // //    $data1 = Flats::Where('building_Id','=',$request->building_Id);
+    //    if($data){
+    //     $data1 = Flats::Where('unit_name','=',$request->unit_name)->get();
+    //     if($data1 && $data) {
 
-         ]
+    //         return response()->json([
+    //             "status"=> false,
+    //             "massage"=> "Already Exists",
 
-        );
-       }
+    //             ]
+
+    //         );
+    //     }
+    //    }
        $flat->owner_Id = $request->owner_Id;
        $flat->unit_name = $request->unit_name;
        $flat->building_Id = $request->building_Id;
@@ -98,6 +103,7 @@ class FlatController extends Controller
        $flat->washroom = $request->washroom;
        $flat->balconi = $request->balconi;
        $flat->rent_value = $request->rent_value;
+       $flat->status = $request->status;
        if($request->hasfile('image'))
     {
         foreach($request->file('image') as $file)
@@ -140,6 +146,7 @@ class FlatController extends Controller
         $data->washroom = $request->input('washroom');
         $data->balconi = $request->input('balconi');
         $data->rent_value = $request->input('rent_value');
+        $data->status = $request->input('status');
         // $data->image = $request->input('image');
         if($request->hasfile('image'))
         {

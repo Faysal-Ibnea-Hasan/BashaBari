@@ -97,9 +97,24 @@
 
                                         <option name="owner_Id" value="owner_Id">Select</option>
                                         @foreach ($dataOwner as $key => $data)
-                                            <option name="owner_Id" value="{{ $data->owner_Id }}">
+                                            <option name="owner_Id" value="{{ $data->id }}">
                                                 {{ $data->name }}</option>
                                         @endforeach
+
+
+
+                                    </select>
+                                </div>
+                                <div class="form-group w-50">
+                                    <label for="exampleInputPassword1">Status</label>
+                                    <select class="form-control" name="status" id="status">
+
+                                        <option name="status" value="">Select</option>
+
+                                        <option name="status" value="Available">Available</option>
+                                        <option name="status" value="Not Available">Not Available</option>
+                                        <option name="status" value="Will Be Available">Will Be Available</option>
+
 
 
 
