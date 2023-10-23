@@ -28,6 +28,14 @@ class RentController extends Controller
             'data' => $data
         ]);
     }
+    public function GetRentListByTenant($tenant_Id){
+        $data = Rents::where('tenant_Id','=',$tenant_Id)->get();
+        return response()->json([
+            'status' => true,
+            'massage' => 'success',
+            'data' => $data
+        ]);
+    }
 
 
     public function CreateRent(Request $request)

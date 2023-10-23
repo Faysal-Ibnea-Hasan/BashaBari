@@ -24,6 +24,14 @@ class FlatController extends Controller
         ]);
 
     }
+    public function GetFlatListByFlatID($flat_Id){
+        $data = Flats::where('flat_Id','=',$flat_Id)->get();
+        return response()->json([
+            'status' => true,
+            'massage' => 'success',
+            'data' => $data
+        ]);
+    }
     public function GetFlatListByBuilding(Request $request,$building_Id)
     {
         $status = $request->status;
