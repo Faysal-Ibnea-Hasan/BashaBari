@@ -24,15 +24,28 @@ class FlatController extends Controller
         ]);
 
     }
-    public function GetFlatListByBuilding($building_Id)
+    public function GetFlatListByBuilding(Request $request,$building_Id)
     {
-        // $data = $id?Owners::find($id):Owners::with('Buildings');
-        $data = Flats::where('building_id','=', $building_Id)->get();
-        return response()->json([
+        $status = $request->status;
+        $data = Flats::where('status','=',$status)->where('building_id','=', $building_Id)->get();
+        $dataAll = Flats::where('building_id','=', $building_Id)->get();
+
+        if ($status)
+        {
+            return response()->json([
             'status' => true,
-            'massage' => 'success',
+            'massage' => 'Found Success',
             'data' => $data
-        ]);
+            ]);
+        }
+
+        else if(!$status){
+            return response()->json([
+                'status' => true,
+                'massage' => 'Not Found',
+                'data' => $dataAll
+                ]);
+        }
 
     }
     public function GetFlatImage($id)

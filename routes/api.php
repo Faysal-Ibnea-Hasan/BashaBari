@@ -46,9 +46,9 @@ Route::controller(OwnerController::class)->group(function () {
     // =============================Flat API========================================
 Route::controller(FlatController::class)->group(function () {
     Route::get('Api/Flat/Table/{id?}', 'GetFlatList');
-    Route::get('Api/Flat/TableByBuilding/{building_Id}', 'GetFlatListByBuilding');
+    Route::post('Api/Flat/TableByBuilding/{building_Id}', 'GetFlatListByBuilding');
     Route::post('Api/Flat/Create_Form_Post', 'CreateFlat');
-    
+
     Route::put('Api/Flat/Updated/{id}', 'UpdateFlat');
     Route::delete('Api/DeleteFlat/{id}', 'DeleteFlat');
 });
