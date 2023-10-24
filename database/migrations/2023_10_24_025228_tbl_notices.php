@@ -11,18 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tbl_admins', function (Blueprint $table) {
+        Schema::create('tbl_notices', function (Blueprint $table)
+        {
+
             $table->id();
 
 
 
-            $table->string('admin_Id')->nullable();
-            $table->string('name')->nullable();
-            $table->string('password')->nullable();
-            $table->string('status')->nullable();
-
-
-
+            $table->string('title')->nullable();
+            $table->string('description')->nullable();
+            $table->string('building_Id')->nullable();
+            $table->string('owner_Id')->nullable();
+            $table->date('date')->nullable();
 
 
 
@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        schema::dropIfExists('tbl_admins');
+        schema::dropIfExists('tbl_notices');
     }
 };

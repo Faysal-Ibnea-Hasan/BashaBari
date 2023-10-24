@@ -10,6 +10,7 @@ use App\Http\Controllers\TenantController;
 use App\Http\Controllers\OwnController;
 use App\Http\Controllers\RentController;
 use App\Http\Controllers\RentalController;
+use App\Http\Controllers\NoticeController;
 
 
 /*
@@ -33,7 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
+
 Route::controller(DashboardController::class)->group(function () {
 
     Route::get('/','GetDashboard')->name('dashboard.get');
@@ -81,7 +82,7 @@ Route::controller(FlatController::class)->group(function () {
     Route::put('Flat/Updated/{id}','UpdateFlat')->name('flat.form.update.put');
                              //===Details===
     Route::get('Flat/Details/{id}','GetDetails')->name('flat.details');
-                             
+
 });
 //===================================TENANT CONTROLLER================================================
 Route::controller(TenantController::class)->group(function () {
@@ -134,6 +135,19 @@ Route::controller(RentalController::class)->group(function () {
                              //===Update===
     Route::get('Rental/Update/{id}','GetRentalUpdateForm')->name('rental.form.update');
     Route::put('Rental/Updated/{id}','UpdateRental')->name('rental.form.update.put');
+});
+//===================================NOTICE CONTROLLER================================================
+Route::controller(NoticeController::class)->group(function () {
+                             //===Create===
+    Route::get('Notice/Create_Form','GetNoticeForm')->name('notice.form.create');
+    Route::post('Notice/Create_Form_Post','CreateNotice')->name('notice.form.post');
+                             //===View===
+    Route::get('Notice/Table','GetNoticeList')->name('notice.table');
+                             //===Delete===
+    Route::get('DeleteNotice/{id}','DeleteNotice')->name('notice.delete');
+                             //===Update===
+    Route::get('Notice/Update/{id}','GetNoticeUpdateForm')->name('notice.form.update');
+    Route::put('Notice/Updated/{id}','UpdateNotice')->name('notice.form.update.put');
 });
 
 });
