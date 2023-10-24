@@ -91,7 +91,7 @@ Route::controller(TenantController::class)->group(function () {
 Route::controller(NoticeController::class)->group(function () {
     Route::get('Api/Notice/Table/{id?}', 'GetNoticeList');
     Route::get('Api/Notice/TableByOwnerID/{owner_Id}', 'GetNoticeListByOwnerID');
-    Route::get('Api/Notice/TableByBuildingID/{building_Id}', 'GetNoticeListByBuildingID'); 
+    Route::get('Api/Notice/TableByBuildingID/{building_Id}', 'GetNoticeListByBuildingID');
     Route::post('Api/Notice/Create_Form_Post', 'CreateNotice');
     Route::put('Api/Notice/Updated/{id}', 'UpdateNotice');
     Route::delete('Api/DeleteNotice/{id}', 'DeleteNotice');

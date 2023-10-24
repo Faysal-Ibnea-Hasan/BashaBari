@@ -36,11 +36,13 @@ class NoticeController extends Controller
     {
         // $data = $id?Owners::find($id):Owners::with('Buildings');
         $data = Notices::where('building_Id','=',$building_Id)->with('Buildings')->get();
+
         return response()->json([
             'status' => true,
             'massage' => 'Success',
             'data' => $data
            ]);
+        
     }
 
     public function CreateNotice(Request $request)
