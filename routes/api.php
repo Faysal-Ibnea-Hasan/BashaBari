@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\OwnerController;
 use App\Http\Controllers\Api\RentalController;
 use App\Http\Controllers\Api\RentController;
 use App\Http\Controllers\Api\TenantController;
+use App\Http\Controllers\Api\NoticeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,5 +87,13 @@ Route::controller(TenantController::class)->group(function () {
     Route::post('Api/Tenant/Create_Form_Post', 'CreateTenant');
     Route::put('Api/Tenant/Updated/{id}', 'UpdateTenant');
     Route::delete('Api/DeleteTenant/{id}', 'DeleteTenant');
+});
+Route::controller(NoticeController::class)->group(function () {
+    Route::get('Api/Notice/Table/{id?}', 'GetNoticeList');
+    Route::get('Api/Notice/TableByOwnerID/{owner_Id}', 'GetNoticeListByOwnerID');
+    Route::get('Api/Notice/TableByBuildingID/{building_Id}', 'GetNoticeListByBuildingID'); 
+    Route::post('Api/Notice/Create_Form_Post', 'CreateNotice');
+    Route::put('Api/Notice/Updated/{id}', 'UpdateNotice');
+    Route::delete('Api/DeleteNotice/{id}', 'DeleteNotice');
 });
 

@@ -10,7 +10,7 @@ use App\Models\Buildings;
 class Notices extends Model
 {
     use HasFactory;
-    protected $table = 'tble_notices';
+    protected $table = 'tbl_notices';
 
     public function Owners(){
         return $this-> belongsTo(Owners::class,'owner_Id','id');

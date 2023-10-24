@@ -29,7 +29,7 @@
                     </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form autocomplete="off" action="{{Route('rent.form.post')}}" method="POST">
+                <form autocomplete="off" action="{{Route('notice.form.post')}}" method="POST">
                     @csrf
 
 
@@ -57,7 +57,7 @@
                     </div>
                 <div class="form-group">
                       <label for="exampleInputPassword1">Title</label>
-                      <input class="form-control form-control-lg" type="text" placeholder="Title">
+                      <input class="form-control form-control-lg" type="text" name="title" placeholder="Title">
 
                 </div>
 
@@ -65,7 +65,7 @@
 
                     <div class="form-group">
                         <label>Textarea</label>
-                        <textarea class="form-control" rows="3" placeholder="Enter ..." spellcheck="false"></textarea>
+                        <textarea class="form-control" rows="3" name="description" placeholder="Enter ..." spellcheck="false"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="date">Date:</label>
