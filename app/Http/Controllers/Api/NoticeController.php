@@ -11,6 +11,17 @@ use App\Models\Buildings;
 
 class NoticeController extends Controller
 {
+    public function GetNoticeList($id=null)
+    {
+        // $data = $id?Owners::find($id):Owners::with('Buildings');
+        $data = $id?Notices::find($id):Notices::all();
+        return response()->json([
+            'status' => true,
+            'massage' => 'success',
+            'data' => $data
+        ]);
+    }
+
     public function GetNoticeListByOwnerID($owner_Id)
     {
         // $data = $id?Owners::find($id):Owners::with('Buildings');
