@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\RentalController;
 use App\Http\Controllers\Api\RentController;
 use App\Http\Controllers\Api\TenantController;
 use App\Http\Controllers\Api\NoticeController;
+use App\Http\Controllers\Api\NoticeLogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,5 +96,15 @@ Route::controller(NoticeController::class)->group(function () {
     Route::post('Api/Notice/Create_Form_Post', 'CreateNotice');
     Route::put('Api/Notice/Updated/{id}', 'UpdateNotice');
     Route::delete('Api/DeleteNotice/{id}', 'DeleteNotice');
+    Route::delete('Api/DeleteNoticeAfterTime/{owner_Id}', 'DeleteNoticeAfterTime');
+});
+Route::controller(NoticeLogController::class)->group(function () {
+    Route::get('Api/NoticeLog/Table/{id?}', 'GetNoticeList');
+    Route::get('Api/NoticeLog/TableByOwnerID/{owner_Id}', 'GetNoticeListByOwnerID');
+    Route::get('Api/NoticeLog/TableByBuildingID/{building_Id}', 'GetNoticeListByBuildingID');
+    Route::post('Api/NoticeLog/Create_Form_Post', 'CreateNotice');
+    Route::put('Api/NoticeLog/Updated/{id}', 'UpdateNotice');
+    Route::delete('Api/DeleteNoticeLog/{id}', 'DeleteNotice');
+    Route::delete('Api/DeleteNoticeLogAfterTime/{owner_Id}', 'DeleteNoticeAfterTime');
 });
 

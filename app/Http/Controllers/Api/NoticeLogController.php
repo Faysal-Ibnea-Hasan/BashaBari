@@ -5,16 +5,16 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Owners;
-use App\Models\Notices;
+use App\Models\Notice_Logs;
 use App\Models\Buildings;
 
 
-class NoticeController extends Controller
+class NoticeLogController extends Controller
 {
     public function GetNoticeList($id=null)
     {
         // $data = $id?Owners::find($id):Owners::with('Buildings');
-        $data = $id?Notices::find($id):Notices::all();
+        $data = $id?Notice_Logs::find($id):Notices::all();
         return response()->json([
             'status' => true,
             'massage' => 'success',
@@ -25,7 +25,7 @@ class NoticeController extends Controller
     public function GetNoticeListByOwnerID($owner_Id)
     {
         // $data = $id?Owners::find($id):Owners::with('Buildings');
-        $data = Notices::where('owner_Id','=',$owner_Id)->get();
+        $data = Notice_Logs::where('owner_Id','=',$owner_Id)->get();
         return response()->json([
             'status' => true,
             'massage' => 'Success',
@@ -35,7 +35,7 @@ class NoticeController extends Controller
     public function GetNoticeListByBuildingID($building_Id)
     {
         // $data = $id?Owners::find($id):Owners::with('Buildings');
-        $data = Notices::where('building_Id','=',$building_Id)->with('Buildings')->get();
+        $data = Notice_Logs::where('building_Id','=',$building_Id)->with('Buildings')->get();
 
         return response()->json([
             'status' => true,
@@ -47,7 +47,7 @@ class NoticeController extends Controller
 
     public function CreateNotice(Request $request)
     {
-       $notice = new Notices();
+       $notice = new Notice_Logs();
 
        $notice->owner_Id = $request->owner_Id;
        $notice->building_Id = $request->building_Id;
@@ -66,7 +66,7 @@ class NoticeController extends Controller
     }
     public function UpdateNotice(Request $request,$id)
     {
-        $data = Notices::find($id);
+        $data = Notice_Logs::find($id);
 
 
        $data->owner_Id = $request->input("owner_Id");
@@ -88,7 +88,7 @@ class NoticeController extends Controller
 
     public function DeleteNotice($id)
     {
-        $data = Notices::find($id);
+        $data = Notice_Logs::find($id);
         $data->delete();
 
         return response()->json([
@@ -97,7 +97,7 @@ class NoticeController extends Controller
         ]);
     }
     public function DeleteNoticeAfterTime($owner_Id){
-        Notices::where('owner_id', $owner_Id)->delete();
+        Notice_Logs::where('owner_id', $owner_Id)->delete();
         return response()->json([
             'status' => true,
             'massage' => 'Notice removed successfully'
