@@ -32,6 +32,22 @@ class FlatController extends Controller
             'data' => $data
         ]);
     }
+    public function GetAvailableFlat($owner_Id){
+        $data = Flats::where('status','Available')->where('owner_Id','=',$owner_Id)->get();
+        return response()->json([
+            'status' => true,
+            'massage' => 'success',
+            'data' => $data
+        ]);
+    }
+    public function GetFlatListByBuildingID($building_Id){
+        $data = Flats::where('building_Id','=',$building_Id)->get();
+        return response()->json([
+            'status' => true,
+            'massage' => 'success',
+            'data' => $data
+        ]);
+    }
     public function GetFlatListByBuilding(Request $request,$building_Id)
     {
         $status = $request->status;
