@@ -169,22 +169,49 @@ class FlatController extends Controller
    ]);
  }
 
+ public function UpdateFlatStatus(Request $request,$id){
+    $data = Flats::find($id);
+    $data->status=$request->input('status');
+    $data->update();
+    return response()->json([
+        'status' => true,
+        'massage' => 'Flat status updated successfully',
+       ]);
+ }
 
     public function UpdateFlat(Request $request,$id)
     {
         $data = Flats::find($id);
+$inputValue = $request->has(['unit_name','building_Id','floor','area','room','washroom','balconi','rent_value','status']);
+if($inputValue){
 
-        $data->unit_name = $request->input('unit_name');
-        $data->building_Id = $request->input('building_Id');
-        $data->floor = $request->input('floor');
-        $data->area = $request->input('area');
+    $data->owner_Id=$request->input('owner_Id');
+    $data->unit_name = $request->input('unit_name');
+    $data->building_Id = $request->input('building_Id');
+    $data->floor = $request->input('floor');
+    $data->area = $request->input('area');
 
-        $data->room = $request->input('room');
-        $data->washroom = $request->input('washroom');
-        $data->balconi = $request->input('balconi');
-        $data->rent_value = $request->input('rent_value');
-        $data->status = $request->input('status');
-        // $data->image = $request->input('image');
+    $data->room = $request->input('room');
+    $data->washroom = $request->input('washroom');
+    $data->balconi = $request->input('balconi');
+    $data->rent_value = $request->input('rent_value');
+    $data->status = $request->input('status');
+}
+
+
+   else if ($inputValue === null){
+    $data->unit_name = $data->unit_name;
+    $data->building_Id=$data->building_Id;
+    $data->floor=$data->floor;
+    $data->area=$data->area;
+    $data->room=$data->room;
+    $data->washroom=$data->washroom;
+    $data->balconi=$data->balconi;
+    $data->rent_value=$data->rent_value;
+    $data->status=$data->status;
+}
+
+    // $data->image = $request->input('image');
         if($request->hasfile('image'))
         {
             $destination = 'uploads/flats/'.$data->image;

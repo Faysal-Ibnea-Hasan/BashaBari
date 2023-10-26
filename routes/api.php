@@ -55,6 +55,7 @@ Route::controller(FlatController::class)->group(function () {
     Route::post('Api/Flat/Create_Form_Post', 'CreateFlat');
 
     Route::put('Api/Flat/Updated/{id}', 'UpdateFlat');
+    Route::put('Api/Flat/Status/Updated/{id}', 'UpdateFlatStatus');
     Route::delete('Api/DeleteFlat/{id}', 'DeleteFlat');
 });
     // =============================Own API========================================
