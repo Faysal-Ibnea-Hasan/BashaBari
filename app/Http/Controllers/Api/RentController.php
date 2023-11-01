@@ -21,7 +21,7 @@ class RentController extends Controller
         ]);
     }
     public function GetRentListByOwner($owner_Id){
-        $data = Rents::where('owner_Id','=',$owner_Id)->get();
+        $data = Rents::where('owner_Id','=',$owner_Id)->with('Tenants')->get();
         return response()->json([
             'status' => true,
             'massage' => 'success',
