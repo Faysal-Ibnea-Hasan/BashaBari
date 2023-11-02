@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\TenantController;
 use App\Http\Controllers\Api\NoticeController;
 use App\Http\Controllers\Api\NoticeLogController;
 use App\Http\Controllers\Api\RentLogController;
+use App\Http\Controllers\Api\ProblemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -123,4 +124,12 @@ Route::controller(RentLogController::class)->group(function () {
     Route::put('Api/RentLog/Updated/{id}', 'UpdateRentLog');
     Route::post('Api/RentLog/UpdatedDate/{tenant_Id}', 'UpdateRentLogLeftDate');
     Route::delete('Api/DeleteRentLog/{id}', 'DeleteRentLog');
+});
+// =============================PROBLEM API========================================
+Route::controller(ProblemController::class)->group(function () {
+    Route::get('Api/Problem/Table/{id?}', 'GetProblem');
+    Route::post('Api/Problem/Create_Form_Post', 'CreateProblem');
+    Route::put('Api/Problem/Updated/{id}', 'UpdateProblem');
+    Route::delete('Api/DeleteProblem/{id}', 'DeleteProblem');
+
 });
