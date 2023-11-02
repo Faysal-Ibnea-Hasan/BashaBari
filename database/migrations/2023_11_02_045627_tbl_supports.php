@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tbl_electricians', function (Blueprint $table) {
+        Schema::create('tbl_supports', function (Blueprint $table) {
             $table->id();
-
-            $table->string('name')->nullable();
-            $table->string('mobile')->nullable();
+            
+            $table->string('owner_Id')->nullable();
+            $table->string('building_Id')->nullable();
+            $table->string('supervisor_Id')->nullable();
+            $table->string('plumber_Id')->nullable();
             $table->string('electrician_Id')->nullable();
-            $table->string('image')->nullable();
 
             $table->timestamps();
         });
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tbl_electricians');
+        Schema::dropIfExists('tbl_supports');
     }
 };

@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\RentController;
 use App\Http\Controllers\Api\TenantController;
 use App\Http\Controllers\Api\NoticeController;
 use App\Http\Controllers\Api\NoticeLogController;
+use App\Http\Controllers\Api\RentLogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,6 +93,7 @@ Route::controller(TenantController::class)->group(function () {
     Route::put('Api/Tenant/Updated/{id}', 'UpdateTenant');
     Route::delete('Api/DeleteTenant/{id}', 'DeleteTenant');
 });
+// =============================NOTICE API========================================
 Route::controller(NoticeController::class)->group(function () {
     Route::get('Api/Notice/Table/{id?}', 'GetNoticeList');
     Route::get('Api/Notice/TableByOwnerID/{owner_Id}', 'GetNoticeListByOwnerID');
@@ -101,6 +103,7 @@ Route::controller(NoticeController::class)->group(function () {
     Route::delete('Api/DeleteNotice/{id}', 'DeleteNotice');
     Route::delete('Api/DeleteNoticeAfterTime/{owner_Id}', 'DeleteNoticeAfterTime');
 });
+// =============================NOTICE LOG API========================================
 Route::controller(NoticeLogController::class)->group(function () {
     Route::get('Api/NoticeLog/Table/{id?}', 'GetNoticeList');
     Route::get('Api/NoticeLog/TableByOwnerID/{owner_Id}', 'GetNoticeListByOwnerID');
@@ -110,4 +113,14 @@ Route::controller(NoticeLogController::class)->group(function () {
     Route::delete('Api/DeleteNoticeLog/{id}', 'DeleteNotice');
     Route::delete('Api/DeleteNoticeLogAfterTime/{owner_Id}', 'DeleteNoticeAfterTime');
 });
+// =============================RENT LOG API========================================
 
+Route::controller(RentLogController::class)->group(function () {
+    Route::get('Api/RentLog/Table/{id?}', 'GetRentLogList');
+    Route::get('Api/RentLog/Owner/{owner_Id}', 'GetRentLogListByOwner');
+    Route::get('Api/RentLog/Tenant/{tenant_Id}', 'GetRentLogListByTenant');
+    Route::post('Api/RentLog/Create_Form_Post', 'CreateRentLog');
+    Route::put('Api/RentLog/Updated/{id}', 'UpdateRentLog');
+    Route::post('Api/RentLog/UpdatedDate/{tenant_Id}', 'UpdateRentLogLeftDate');
+    Route::delete('Api/DeleteRentLog/{id}', 'DeleteRentLog');
+});

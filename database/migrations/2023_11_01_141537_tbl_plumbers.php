@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('mobile')->nullable();
             $table->string('plumber_Id')->nullable();
-            
+            $table->string('image')->nullable();
+
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('tbl_plumbers');
     }
 };

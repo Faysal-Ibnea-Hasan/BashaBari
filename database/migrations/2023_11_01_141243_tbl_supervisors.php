@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('mobile')->nullable();
             $table->string('supervisor_Id')->nullable();
+            $table->string('image')->nullable();
 
             $table->timestamps();
         });

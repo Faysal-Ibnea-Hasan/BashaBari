@@ -5,31 +5,31 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Tenants;
-use App\Models\Rents;
+use App\Models\Rent_Logs;
 use App\Models\Flats;
 
-class RentController extends Controller
+class RentLogController extends Controller
 {
-    public function GetRentList($id=null)
+    public function GetRentLogList($id=null)
     {
         // $data = $id?Owners::find($id):Owners::with('Buildings');
-        $data = $id?Rents::find($id):Rents::all();
+        $data = $id?Rent_Logs::find($id):Rent_Logs::all();
         return response()->json([
             'status' => true,
             'massage' => 'success',
             'data' => $data
         ]);
     }
-    public function GetRentListByOwner($owner_Id){
-        $data = Rents::where('owner_Id','=',$owner_Id)->with('Tenants')->get();
+    public function GetRentLogListByOwner($owner_Id){
+        $data = Rent_Logs::where('owner_Id','=',$owner_Id)->with('Tenants')->get();
         return response()->json([
             'status' => true,
             'massage' => 'success',
             'data' => $data
         ]);
     }
-    public function GetRentListByTenant($tenant_Id){
-        $data = Rents::where('tenant_Id','=',$tenant_Id)->get();
+    public function GetRentLogListByTenant($tenant_Id){
+        $data = Rent_Logs::where('tenant_Id','=',$tenant_Id)->get();
         return response()->json([
             'status' => true,
             'massage' => 'success',
@@ -38,9 +38,9 @@ class RentController extends Controller
     }
 
 
-    public function CreateRent(Request $request)
+    public function CreateRentLog(Request $request)
     {
-       $rent = new Rents();
+       $rent = new Rent_Logs();
 
        $rent->tenant_Id = $request->tenant_Id;
        $rent->flat_Id = $request->flat_Id;
@@ -58,11 +58,23 @@ class RentController extends Controller
         ]);
     }
 
+    public function UpdateRentLogLeftDate(Request $request,$tenant_Id){
+        $data = Rent_Logs::where('tenant_Id',$tenant_Id)->first();//first() must be used
+        if($data){
 
+            $data->left_at = $request->left_at;
+            $data->save();
+        }//we need to check if the data is there or not
 
-    public function UpdateRent(Request $request,$id)
+        return response()->json([
+            'status'=> true,
+            'massage'=>'Updated successfully'
+        ]);
+    }
+
+    public function UpdateRentLog(Request $request,$id)
     {
-       $data = Rents::find($id);
+       $data = Rent_Logs::find($id);
 
        $data->tenant_Id = $request->input("tenant_Id");
        $data->flat_Id = $request->input("flat_Id");
@@ -81,9 +93,9 @@ class RentController extends Controller
     }
 
 
-    public function DeleteRent($id)
+    public function DeleteRentLog($id)
     {
-        $data = Rents::find($id);
+        $data = Rent_Logs::find($id);
         $data->delete();
 
 

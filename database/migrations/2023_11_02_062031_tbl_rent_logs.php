@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tbl_rents', function (Blueprint $table) {
+        Schema::create('tbl_rent_logs', function (Blueprint $table) {
             $table->id();
 
 
@@ -40,6 +40,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        schema::dropIfExists('tbl_rents');
+        schema::dropIfExists('tbl_rent_logs');
     }
 };
