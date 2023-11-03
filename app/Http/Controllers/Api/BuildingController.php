@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Buildings;
 use App\Models\Owners;
 use App\Models\Flats;
+use App\Models\Problems;
 use App\Helpers\Helper;
 
 class BuildingController extends Controller
@@ -34,13 +35,18 @@ class BuildingController extends Controller
     public function GetBuildingOwner($owner_Id)
     {
         // $data = $id?Owners::find($id):Owners::with('Buildings');
-        $data = Buildings::where('owner_Id','=',$owner_Id)->get();
+        $data = Buildings::where('owner_Id','=',$owner_Id)->with('Problems')->get();
+        $data1 = $data->whereNotNull('problems');//whereNotNull() is used for getting value without null values
+       // $data1 = $data->pluck('problems'); get only 'problems' column value
+
 
         return response()->json([
             'status' => true,
             'massage' => 'success',
-            'data' => $data
+            'data' => $data1,
         ]);
+
+
     }
     public function GetBuildingByArea(Request $request)
     {

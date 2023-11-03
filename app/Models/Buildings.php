@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Owners;
+use App\Models\Problems;
 
 class Buildings extends Model
 {
@@ -13,5 +14,8 @@ class Buildings extends Model
 
     public function Owners(){
         return $this->belongsTo(Owners::class,'owner_Id','id');
+    }
+    public function Problems(){
+        return $this->belongsTo(Problems::class,'building_Id','building_Id');
     }
 }
