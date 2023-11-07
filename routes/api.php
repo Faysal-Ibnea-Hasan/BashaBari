@@ -32,6 +32,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::controller(BuildingController::class)->group(function () {
     Route::get('Api/Building/Table/{id?}', 'GetBuildingList');
     Route::get('Api/Building/Owner/{owner_Id}', 'GetBuildingOwner');
+    Route::get('Api/Building/OwnerProblem/{owner_Id}', 'GetBuildingOwnerProblem');
     Route::post('Api/Building/ByArea', 'GetBuildingByArea');
     Route::get('Api/Building/ByBuilding_Id/{building_Id}', 'GetBuildingByBuilding_Id');
     Route::post('Api/Building/Create_Form_Post', 'CreateBuilding');
@@ -90,6 +91,7 @@ Route::controller(TenantController::class)->group(function () {
     Route::get('Api/Tenant/Image/{image}', 'GetTenantImage');
     Route::get('Api/Tenant/TableById/{tenant_Id}', 'GetTenantListByTenantId');
     Route::post('Api/Tenant/Check', 'CheckTenant');
+    Route::post('Api/Tenant/CheckMobile/{id}', 'check_tenant_mobile');
     Route::post('Api/Tenant/Create_Form_Post', 'CreateTenant');
     Route::put('Api/Tenant/Updated/{id}', 'UpdateTenant');
     Route::delete('Api/DeleteTenant/{id}', 'DeleteTenant');

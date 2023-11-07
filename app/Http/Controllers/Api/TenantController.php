@@ -74,6 +74,27 @@ class TenantController extends Controller
             ]);
         }
     }
+    public function check_tenant_mobile($id){
+
+        $data = Tenants::find($id);
+        //dd($data);
+        if($data->name && $data->nid && $data->address != null){
+            return response()->json([
+                'status' => true,
+                'massage' => 'Registered',
+                'data' => $data
+
+            ]);
+        }
+        else{
+            return response()->json([
+                'status' => false,
+                'massage' => 'Seems like you are not registered!Please register',
+
+
+            ]);
+        }
+    }
 
 
     public function CreateTenant(Request $request)
