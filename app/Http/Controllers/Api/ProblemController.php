@@ -19,6 +19,14 @@ class ProblemController extends Controller
             'data' => $data
         ]);
     }
+    public function GetProblemByTenantId($tenant_Id){
+        $data = Problems::where('tenant_Id',$tenant_Id)->get();
+        return response()->Json([
+            'status' => true,
+            'massage' => 'Data founded',
+            'data' => $data
+        ]);
+    }
     public function CreateProblem(Request $request){
         $data = new Problems();
         $data->building_Id = $request->building_Id;

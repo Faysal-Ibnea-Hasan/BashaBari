@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 
 use Illuminate\Http\Request;
 use App\Models\Tenants;
+
 use Illuminate\Support\Facades\File;
 
 class TenantController extends Controller
@@ -71,13 +72,31 @@ class TenantController extends Controller
                 'status' => false,
                 'massage' => 'Not Found',
 
+
             ]);
         }
     }
-    public function check_tenant_mobile($id){
+    public function create_tenant_mobile(Request $request){
+        $data = new Tenants();
+        $data->mobile = $request->mobile;
+        $data->password = $request->password;
 
-        $data = Tenants::find($id);
+        $data->tenant_Id = Helper::Generator(new Tenants,'tenant_Id',4,'Tenant');
+        $data->save();
+        return response()->Json([
+            'status' => true,
+            'massage'=> 'Account created successfully',
+            'data' => $data
+        ]);
+    }
+    public function check_tenant_mobile($id){
+        // $data = Tenants::where('id',$id)
+        // ->where('name', '=', '')
+        // ->orWhereNull('name')
+        // ->get();
         //dd($data);
+        $data = Tenants::find($id);
+
         if($data->name && $data->nid && $data->address != null){
             return response()->json([
                 'status' => true,
@@ -87,12 +106,24 @@ class TenantController extends Controller
             ]);
         }
         else{
+            $datas =  [
+                'name' => $data->name = '',
+                'mobile' => $data->mobile,
+                'nid' => $data->nid = '',
+                'password' => $data->password,
+                'tenant_Id' => $data->tenant_Id,
+                'address' => $data->address = '',
+                'id' => $data->id
+            ];
+
+
             return response()->json([
                 'status' => false,
-                'massage' => 'Seems like you are not registered!Please register',
-
-
+                'massage' => 'Your profile is not complete yet!Please complete',
+                'data'=> $datas
             ]);
+
+
         }
     }
 

@@ -9,4 +9,5 @@ class Tenants extends Model
 {
     use HasFactory;
     protected $table = 'tbl_tenants';
+
 }

@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\NoticeController;
 use App\Http\Controllers\Api\NoticeLogController;
 use App\Http\Controllers\Api\RentLogController;
 use App\Http\Controllers\Api\ProblemController;
+use App\Http\Controllers\Api\CommonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +94,7 @@ Route::controller(TenantController::class)->group(function () {
     Route::post('Api/Tenant/Check', 'CheckTenant');
     Route::post('Api/Tenant/CheckMobile/{id}', 'check_tenant_mobile');
     Route::post('Api/Tenant/Create_Form_Post', 'CreateTenant');
+    Route::post('Api/Tenant/Create_Form_Post_Mobile', 'create_tenant_mobile');
     Route::put('Api/Tenant/Updated/{id}', 'UpdateTenant');
     Route::delete('Api/DeleteTenant/{id}', 'DeleteTenant');
 });
@@ -130,8 +132,13 @@ Route::controller(RentLogController::class)->group(function () {
 // =============================PROBLEM API========================================
 Route::controller(ProblemController::class)->group(function () {
     Route::get('Api/Problem/Table/{id?}', 'GetProblem');
+    Route::get('Api/Problem/TableByTenantId/{tenant_Id}', 'GetProblemByTenantId');
     Route::post('Api/Problem/Create_Form_Post', 'CreateProblem');
     Route::put('Api/Problem/Updated/{id}', 'UpdateProblem');
     Route::delete('Api/DeleteProblem/{id}', 'DeleteProblem');
 
+});
+// =============================COMMON API========================================
+Route::controller(CommonController::class)->group(function () {
+    Route::post('Api/Login/Mobile','mobile_login');
 });
