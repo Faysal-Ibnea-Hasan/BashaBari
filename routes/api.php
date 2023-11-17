@@ -135,6 +135,7 @@ Route::controller(ProblemController::class)->group(function () {
     Route::get('Api/Problem/TableByTenantId/{tenant_Id}', 'GetProblemByTenantId');
     Route::post('Api/Problem/Create_Form_Post', 'CreateProblem');
     Route::put('Api/Problem/Updated/{id}', 'UpdateProblem');
+    Route::put('Api/Problem/UpdatedStatus/{id}', 'UpdateProblemStatus');
     Route::delete('Api/DeleteProblem/{id}', 'DeleteProblem');
 
 });

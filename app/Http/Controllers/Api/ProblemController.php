@@ -63,6 +63,20 @@ class ProblemController extends Controller
         ]);
 
     }
+    public function UpdateProblemStatus(Request $request,$id){
+        $data = Problems::find($id);
+
+
+        $data->status = $request->input('status') ?? 'Unsolved';
+
+        $data->update();
+
+        return response()->json([
+            'status' => true,
+            'massage' => 'Problem status updated successfully'
+        ]);
+
+    }
 
     public function DeleteProblem($id){
         $data = Problems::find($id);
