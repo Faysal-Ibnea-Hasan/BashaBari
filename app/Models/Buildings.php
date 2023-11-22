@@ -16,6 +16,6 @@ class Buildings extends Model
         return $this->belongsTo(Owners::class,'owner_Id','id');
     }
     public function Problems(){
-        return $this->belongsTo(Problems::class,'building_Id','building_Id');
+        return $this->hasMany(Problems::class,'building_Id','building_Id');
     }
 }

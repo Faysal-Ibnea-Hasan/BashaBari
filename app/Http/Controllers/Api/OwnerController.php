@@ -48,6 +48,44 @@ class OwnerController extends Controller
         return response()->file($path);
     }
 
+    public function profile_update_owner_mobile(Request $request,$id){ 
+        $data = Owners::find($id);
+        $data->name = $request->input("name") ?? "";
+       $data->mobile = $request->input("mobile") ?? "";
+       $data->address = $request->input("address") ?? "";
+       $data->password = $request->input("password") ?? "";
+       $data->nid = $request->input("nid") ?? "";
+    //    $data->image = $request->input("image");
+    if($request->hasfile('image')){
+        $destination = 'uploads/tenants/'.$data->image;
+        if(File::exists($destination))
+        {
+            File::delete($destination);
+        }
+
+        $file = $request->file('image');
+        $filename = time() . '.' . $request->image->extension();
+        $file->move('uploads/tenants/' , $filename);
+        $data->image = $filename;
+    }
+    else{
+
+        $data->image='';
+    }
+
+
+       $data->update();
+
+       return response()->json([
+        'status' => true,
+        'massage' => 'Owner updated successfully',
+        'data' => $data
+       ]);
+
+    }
+
+
+
 
     public function CreateOwner(Request $request)
     {
@@ -97,7 +135,7 @@ class OwnerController extends Controller
         else{
             $data->nid = $data->nid;
         }
-       
+
     //    $data->image = $request->input("image");
     if($request->hasfile('image'))
     {

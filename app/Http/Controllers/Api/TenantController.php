@@ -127,6 +127,42 @@ class TenantController extends Controller
         }
     }
 
+    public function profile_update_tenant_mobile(Request $request,$id){ 
+        $data = Tenants::find($id);
+        $data->name = $request->input("name") ?? "";
+       $data->mobile = $request->input("mobile") ?? "";
+       $data->address = $request->input("address") ?? "";
+       $data->password = $request->input("password") ?? "";
+       $data->nid = $request->input("nid") ?? "";
+    //    $data->image = $request->input("image");
+    if($request->hasfile('image')){
+        $destination = 'uploads/tenants/'.$data->image;
+        if(File::exists($destination))
+        {
+            File::delete($destination);
+        }
+
+        $file = $request->file('image');
+        $filename = time() . '.' . $request->image->extension();
+        $file->move('uploads/tenants/' , $filename);
+        $data->image = $filename;
+    }
+    else{
+
+        $data->image='';
+    }
+
+
+       $data->update();
+
+       return response()->json([
+        'status' => true,
+        'massage' => 'Tenant updated successfully',
+        'data' => $data
+       ]);
+
+    }
+
 
     public function CreateTenant(Request $request)
     {

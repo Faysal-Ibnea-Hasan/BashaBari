@@ -45,6 +45,7 @@ Route::controller(OwnerController::class)->group(function () {
     Route::get('Api/Owner/Table/{id?}', 'GetOwnerList');
     Route::get('Api/Owner/Image/{image}', 'GetOwnerImage');
     Route::post('Api/Owner/Check', 'CheckOwner');
+    Route::post('Api/Owner/ProfileMobile/{id}', 'profile_update_owner_mobile');
     Route::post('Api/Owner/Create_Form_Post', 'CreateOwner');
     Route::put('Api/Owner/Updated/{id}', 'UpdateOwner');
     Route::delete('Api/DeleteOwner/{id}', 'DeleteOwner');
@@ -93,6 +94,7 @@ Route::controller(TenantController::class)->group(function () {
     Route::get('Api/Tenant/TableById/{tenant_Id}', 'GetTenantListByTenantId');
     Route::post('Api/Tenant/Check', 'CheckTenant');
     Route::post('Api/Tenant/CheckMobile/{id}', 'check_tenant_mobile');
+    Route::post('Api/Tenant/ProfileMobile/{id}', 'profile_update_tenant_mobile');
     Route::post('Api/Tenant/Create_Form_Post', 'CreateTenant');
     Route::post('Api/Tenant/Create_Form_Post_Mobile', 'create_tenant_mobile');
     Route::put('Api/Tenant/Updated/{id}', 'UpdateTenant');
