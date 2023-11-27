@@ -78,6 +78,7 @@ class TenantController extends Controller
     }
     public function create_tenant_mobile(Request $request){
         $data = new Tenants();
+        $data->name = $request->name;
         $data->mobile = $request->mobile;
         $data->password = $request->password;
 
@@ -86,7 +87,8 @@ class TenantController extends Controller
         return response()->Json([
             'status' => true,
             'massage'=> 'Account created successfully',
-            'data' => $data
+            'data' => $data,
+            'role' => 1
         ]);
     }
     public function check_tenant_mobile($id){
@@ -127,7 +129,7 @@ class TenantController extends Controller
         }
     }
 
-    public function profile_update_tenant_mobile(Request $request,$id){ 
+    public function profile_update_tenant_mobile(Request $request,$id){
         $data = Tenants::find($id);
         $data->name = $request->input("name") ?? "";
        $data->mobile = $request->input("mobile") ?? "";

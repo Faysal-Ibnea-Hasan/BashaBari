@@ -22,9 +22,14 @@ class CommonController extends Controller
                 return response([
                     'status' => true,
                     'massage' => 'Data found',
+                    'name' => $data->name,
                     'mobile' => $data->mobile,
-                    'password' => $data->password,
-                    'owner_Id' => $data->id
+                    'empid' => $data->id,
+                    'ide' => (string)$data->id,
+                    'created_at' => $data->created_at,
+                    'updated_at' => $data->updated_at,
+                    'role' => $type
+
                 ]);
             }
             else{
@@ -41,9 +46,14 @@ class CommonController extends Controller
                 return response([
                     'status' => true,
                     'massage' => 'Data found',
+                    'name' => $data->name,
                     'mobile' => $data->mobile,
-                    'password' => $data->password,
-                    'tenant_Id' => $data->tenant_Id
+                    'empid' => $data->id,
+                    'ide' => $data->tenant_Id,
+                    'created_at' => $data->created_at,
+                    'updated_at' => $data->updated_at,
+                    'role' => $type
+                    
                 ]);
             }
             else{
