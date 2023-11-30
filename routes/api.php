@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\NoticeLogController;
 use App\Http\Controllers\Api\RentLogController;
 use App\Http\Controllers\Api\ProblemController;
 use App\Http\Controllers\Api\CommonController;
+use App\Http\Controllers\Api\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -144,4 +145,8 @@ Route::controller(ProblemController::class)->group(function () {
 // =============================COMMON API========================================
 Route::controller(CommonController::class)->group(function () {
     Route::post('Api/Login/Mobile','mobile_login');
+});
+// =============================DASHBOARD API========================================
+Route::controller(DashboardController::class)->group(function () {
+    Route::get('Api/Dashboard','GetDashboard');
 });
