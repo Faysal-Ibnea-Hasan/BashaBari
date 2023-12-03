@@ -16,20 +16,23 @@ class BuildingController extends Controller
     {
         // $data = $id?Owners::find($id):Owners::with('Buildings');
         $data = $id?Buildings::find($id):Buildings::all();
+        $data1 = Buildings::with('Flats')->count();
         return response()->json([
             'status' => true,
             'massage' => 'success',
-            'data' => $data
+            'data' => $data,$data1
         ]);
     }
     public function GetBuildingByBuilding_Id($building_Id)
     {
         // $data = $id?Owners::find($id):Owners::with('Buildings');
         $data = Buildings::where('building_Id','=', $building_Id)->get();
+        $totalFlats = Flats::where('building_Id','=', $building_Id)->count();
         return response()->json([
             'status' => true,
             'massage' => 'success',
-            'data' => $data
+            'data' => $data,
+            'totalFlats' => $totalFlats
         ]);
     }
     public function GetBuildingOwner($owner_Id)
@@ -103,6 +106,9 @@ class BuildingController extends Controller
        $building->city = $request->city;
        $building->district = $request->district;
        $building->postal_code = $request->postal_code;
+       $building->facilities = $request->facilities;
+       $building->price_range = $request->price_range;
+       $building->image = $request->image;
 
 
 
@@ -145,6 +151,10 @@ class BuildingController extends Controller
        $data->city = $request->input("city");
        $data->district = $request->input("district");
        $data->postal_code = $request->input("postal_code");
+       $data->facilities = $request->input("facilities");
+       $data->price_range = $request->input("price_range");
+       $data->image = $request->input("image");
+
 
 
 
