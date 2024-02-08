@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\RentLogController;
 use App\Http\Controllers\Api\ProblemController;
 use App\Http\Controllers\Api\CommonController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\ShopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -149,4 +150,14 @@ Route::controller(CommonController::class)->group(function () {
 // =============================DASHBOARD API========================================
 Route::controller(DashboardController::class)->group(function () {
     Route::get('Api/Dashboard','GetDashboard');
+});
+// =============================CREATE SEARCH AGENT API========================================
+Route::controller(CreateSearchAgentController::class)->group(function () {
+    Route::post('Api/Create-Search-Agent','CreateSearchAgent');
+    Route::get('Api/Get-Create-Search-Agent/{id?}','GetCreateSearchAgent');
+});
+// =============================SHOP API========================================
+Route::controller(ShopController::class)->group(function () {
+    Route::post('Api/Create_Shop','CreateShop');
+    Route::get('Api/Get-Create-Search-Agent/{id?}','GetCreateSearchAgent');
 });
