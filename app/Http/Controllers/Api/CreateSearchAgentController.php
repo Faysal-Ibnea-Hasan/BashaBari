@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
-// ========================================Import Models ====================================
 use App\Models\Create_Search_Agents;
 
 class CreateSearchAgentController extends Controller
@@ -12,7 +12,7 @@ class CreateSearchAgentController extends Controller
     {
         $data = new Create_Search_Agents();
 
-        $data->name = $request->name ?? "";
+         $data->name = $request->name ?? "";
         $data->email = $request->email ?? "";
         $data->mobile = $request->mobile ?? "";
         $data->city = $request->city ?? "";
@@ -28,9 +28,10 @@ class CreateSearchAgentController extends Controller
         return response()->Json([
             'status' => true,
             'massage' => 'Request submitted successfully'
-        ]);
-    }
 
+        ]);
+
+    }
     public function GetCreateSearchAgent($id=null){
         $data = $id?Create_Search_Agents::find($id):Create_Search_Agents::all();
         return response()->json([
