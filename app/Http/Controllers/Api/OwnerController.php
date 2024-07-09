@@ -16,7 +16,7 @@ class OwnerController extends Controller
     public function GetOwnerList($id=null)
     {
         $data = $id?Owners::find($id):Owners::all();
-
+        
         return response()->json([
             'status' => true,
             'massage' => 'success',
