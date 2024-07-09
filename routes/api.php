@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\RentLogController;
 use App\Http\Controllers\Api\ProblemController;
 use App\Http\Controllers\Api\CommonController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\CreateSearchAgentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,12 +34,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     // =============================BUILDING API========================================
 Route::controller(BuildingController::class)->group(function () {
     Route::get('Api/Building/Table/{id?}', 'GetBuildingList');
-    Route::get('Api/Building/Owner/{owner_Id}', 'GetBuildingOwner');
-    Route::get('Api/Building/OwnerProblem/{owner_Id}', 'GetBuildingOwnerProblem');
+    Route::get('Api/Building/TableWithFlat', 'GetBuildingListWithFlat');
+    Route::post('Api/Building/Owner', 'GetBuildingOwner');
+    Route::post('Api/Building/OwnerProblem', 'GetBuildingOwnerProblem');
     Route::post('Api/Building/ByArea', 'GetBuildingByArea');
-    Route::get('Api/Building/ByBuilding_Id/{building_Id}', 'GetBuildingByBuilding_Id');
+    Route::post('Api/Building/ByBuilding_Id', 'GetBuildingByBuilding_Id');
     Route::post('Api/Building/Create_Form_Post', 'CreateBuilding');
-    Route::put('Api/Building/Updated/{id}', 'UpdateBuilding');
+    Route::post('Api/Building/Updated', 'UpdateBuilding');
     Route::delete('Api/DeleteBuilding/{id}', 'DeleteBuilding');
 });
     // =============================Owner API========================================
@@ -46,39 +48,38 @@ Route::controller(OwnerController::class)->group(function () {
     Route::get('Api/Owner/Table/{id?}', 'GetOwnerList');
     Route::get('Api/Owner/Image/{image}', 'GetOwnerImage');
     Route::post('Api/Owner/Check', 'CheckOwner');
-    Route::post('Api/Owner/ProfileMobile/{id}', 'profile_update_owner_mobile');
+     Route::post('Api/Owner/ProfileMobile', 'profile_update_owner_mobile');
     Route::post('Api/Owner/Create_Form_Post', 'CreateOwner');
-    Route::put('Api/Owner/Updated/{id}', 'UpdateOwner');
+    Route::post('Api/Owner/Updated', 'UpdateOwner');
     Route::delete('Api/DeleteOwner/{id}', 'DeleteOwner');
 });
     // =============================Flat API========================================
 Route::controller(FlatController::class)->group(function () {
     Route::get('Api/Flat/Table/{id?}', 'GetFlatList');
-    Route::get('Api/Flat/TableByFlatID/{flat_Id}', 'GetFlatListByFlatID');
-    Route::get('Api/Flat/Available/{owner_Id}', 'GetAvailableFlat');
-    Route::get('Api/Flat/TableByBuildingID/{building_Id}', 'GetFlatListByBuildingID');
-    Route::post('Api/Flat/TableByBuilding/{building_Id}', 'GetFlatListByBuilding');
+    Route::get('Api/Flat/TableByFlatID', 'GetFlatListByFlatID');
+    Route::get('Api/Flat/Available', 'GetAvailableFlat');
+    Route::post('Api/Flat/TableByBuildingID', 'GetFlatListByBuildingID');
+    Route::post('Api/Flat/TableByBuilding', 'GetFlatListByBuilding');
     Route::post('Api/Flat/Create_Form_Post', 'CreateFlat');
-
-    Route::put('Api/Flat/Updated/{id}', 'UpdateFlat');
-    Route::put('Api/Flat/Status/Updated/{id}', 'UpdateFlatStatus');
+    Route::post('Api/Flat/Updated', 'UpdateFlat');
+    Route::post('Api/Flat/Status/Updated', 'UpdateFlatStatus');
     Route::delete('Api/DeleteFlat/{id}', 'DeleteFlat');
 });
     // =============================Own API========================================
 Route::controller(OwnController::class)->group(function () {
     Route::get('Api/Own/Table/{id?}', 'GetOwnList');
-    Route::get('Api/Own/Assign/{owner_id?}', 'GetAssign');
+    Route::post('Api/Own/Assign', 'GetAssign');
     Route::post('Api/Own/Create_Form_Post', 'CreateOwn');
-    Route::put('Api/Own/Updated/{id}', 'UpdateOwn');
+    Route::post('Api/Own/Updated', 'UpdateOwn');
     Route::delete('Api/DeleteOwn/{id}', 'DeleteOwn');
 });
     // =============================Rent API========================================
 Route::controller(RentController::class)->group(function () {
     Route::get('Api/Rent/Table/{id?}', 'GetRentList');
-    Route::get('Api/Rent/Owner/{owner_Id}', 'GetRentListByOwner');
-    Route::get('Api/Rent/Tenant/{tenant_Id}', 'GetRentListByTenant');
+    Route::post('Api/Rent/Owner', 'GetRentListByOwner');
+    Route::post('Api/Rent/Tenant', 'GetRentListByTenant');
     Route::post('Api/Rent/Create_Form_Post', 'CreateRent');
-    Route::put('Api/Rent/Updated/{id}', 'UpdateRent');
+    Route::post('Api/Rent/Updated', 'UpdateRent');
     Route::delete('Api/DeleteRent/{id}', 'DeleteRent');
 });
     // =============================Rental API========================================
@@ -98,16 +99,17 @@ Route::controller(TenantController::class)->group(function () {
     Route::post('Api/Tenant/ProfileMobile/{id}', 'profile_update_tenant_mobile');
     Route::post('Api/Tenant/Create_Form_Post', 'CreateTenant');
     Route::post('Api/Tenant/Create_Form_Post_Mobile', 'create_tenant_mobile');
-    Route::put('Api/Tenant/Updated/{id}', 'UpdateTenant');
+    Route::post('Api/Tenant/Updated', 'UpdateTenant');
+    Route::post('Api/Tenant/UpdatedStatus', 'UpdateAssignStatus');
     Route::delete('Api/DeleteTenant/{id}', 'DeleteTenant');
 });
 // =============================NOTICE API========================================
 Route::controller(NoticeController::class)->group(function () {
     Route::get('Api/Notice/Table/{id?}', 'GetNoticeList');
-    Route::get('Api/Notice/TableByOwnerID/{owner_Id}', 'GetNoticeListByOwnerID');
-    Route::get('Api/Notice/TableByBuildingID/{building_Id}', 'GetNoticeListByBuildingID');
+    Route::post('Api/Notice/TableByOwnerID', 'GetNoticeListByOwnerID');
+    Route::post('Api/Notice/TableByBuildingID', 'GetNoticeListByBuildingID');
     Route::post('Api/Notice/Create_Form_Post', 'CreateNotice');
-    Route::put('Api/Notice/Updated/{id}', 'UpdateNotice');
+    Route::post('Api/Notice/Updated', 'UpdateNotice');
     Route::delete('Api/DeleteNotice/{id}', 'DeleteNotice');
     Route::delete('Api/DeleteNoticeAfterTime/{owner_Id}', 'DeleteNoticeAfterTime');
 });
@@ -135,10 +137,10 @@ Route::controller(RentLogController::class)->group(function () {
 // =============================PROBLEM API========================================
 Route::controller(ProblemController::class)->group(function () {
     Route::get('Api/Problem/Table/{id?}', 'GetProblem');
-    Route::get('Api/Problem/TableByTenantId/{tenant_Id}', 'GetProblemByTenantId');
+    Route::post('Api/Problem/TableByTenantId', 'GetProblemByTenantId');
     Route::post('Api/Problem/Create_Form_Post', 'CreateProblem');
-    Route::put('Api/Problem/Updated/{id}', 'UpdateProblem');
-    Route::put('Api/Problem/UpdatedStatus/{id}', 'UpdateProblemStatus');
+    Route::post('Api/Problem/Updated', 'UpdateProblem');
+    Route::post('Api/Problem/UpdatedStatus', 'UpdateProblemStatus');
     Route::delete('Api/DeleteProblem/{id}', 'DeleteProblem');
 
 });
@@ -149,4 +151,9 @@ Route::controller(CommonController::class)->group(function () {
 // =============================DASHBOARD API========================================
 Route::controller(DashboardController::class)->group(function () {
     Route::get('Api/Dashboard','GetDashboard');
+});
+// =============================CREATE SEARCH AGENT API========================================
+Route::controller(CreateSearchAgentController::class)->group(function () {
+    Route::post('Api/Create-Search-Agent','CreateSearchAgent');
+    Route::get('Api/Get-Create-Search-Agent/{id?}','GetCreateSearchAgent');
 });

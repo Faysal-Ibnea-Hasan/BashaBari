@@ -20,9 +20,10 @@ return new class extends Migration
             $table->string('mobile')->nullable();
             $table->string('address')->nullable();
             $table->string('password')->nullable();
-            
+            $table->string('email')->nullable();
             $table->string('image')->nullable();
             $table->string('nid')->nullable();
+
 
 
 

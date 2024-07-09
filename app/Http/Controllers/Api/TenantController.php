@@ -3,24 +3,20 @@
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
-
 use Illuminate\Http\Request;
+//====================================Import Models====================================
 use App\Models\Tenants;
-
+//====================================Import Supports==================================
 use Illuminate\Support\Facades\File;
 
 class TenantController extends Controller
 {
     public function GetTenantList($id=null)
     {
-        // $data = $id?Owners::find($id):Owners::with('Buildings');
         $data = $id?Tenants::find($id):Tenants::all();
         $imagePath = 'uploads/tenants/' . $data->image; // 'uploads/tenants/' is the path and  $data->image is for sending image endpoint to
 
         $imageUrl = asset($imagePath);
-
-
-
         return response()->json([
             'status' => true,
             'massage' => 'success',
@@ -38,7 +34,6 @@ class TenantController extends Controller
     }
     public function GetTenantListByTenantId($tenant_Id)
     {
-        // $data = $id?Owners::find($id):Owners::with('Buildings');
         $data = Tenants::where('tenant_Id','=',$tenant_Id)->get();
         // $imagePath = $data->image;
 
@@ -81,6 +76,8 @@ class TenantController extends Controller
         $data->name = $request->name;
         $data->mobile = $request->mobile;
         $data->password = $request->password;
+        $data->email = $request->email;
+        $data->assign_status = $request->assign_status;
 
         $data->tenant_Id = Helper::Generator(new Tenants,'tenant_Id',4,'Tenant');
         $data->save();
@@ -115,7 +112,9 @@ class TenantController extends Controller
                 'password' => $data->password,
                 'tenant_Id' => $data->tenant_Id,
                 'address' => $data->address = '',
-                'id' => $data->id
+                'id' => $data->id,
+                'assign_status' => $data->assign_status,
+                'email' => $data->email
             ];
 
 
@@ -136,6 +135,8 @@ class TenantController extends Controller
        $data->address = $request->input("address") ?? "";
        $data->password = $request->input("password") ?? "";
        $data->nid = $request->input("nid") ?? "";
+       $data->email = $request->input("email") ?? "";
+       $data->assign_status = $request->input("assign_status") ?? "";
     //    $data->image = $request->input("image");
     if($request->hasfile('image')){
         $destination = 'uploads/tenants/'.$data->image;
@@ -170,26 +171,23 @@ class TenantController extends Controller
     {
        $tenant = new Tenants();
 
-       $tenant->name = $request->name;
-       $tenant->mobile = $request->mobile;
-       $tenant->address = $request->address;
-       $tenant->password = $request->password;
-       $tenant->nid = $request->nid;
+       $tenant->name = $request->name ?? "";
+       $tenant->mobile = $request->mobile ?? "";
+       $tenant->address = $request->address ?? "";
+       $tenant->password = $request->password ?? "";
+       $tenant->nid = $request->nid ?? "";
+       $tenant->email = $request->email ?? "";
+       $tenant->assign_status = $request->assign_status ?? "";
        $tenant->tenant_Id = Helper::Generator(new Tenants,'tenant_Id',4,'Tenant');
-    //    $tenant->image = $request->image;
-    if($request->hasfile('image'))
-    {
-       $file = $request->file('image');
-       $filename = time() . '.' . $file->extension();
-       $file->move('uploads/tenants/' , $filename);
-       $tenant->image = $filename;
-    }
-    else
-    {
-
-        $tenant->image='';
-    }
-
+       $hasfile=($request->hasfile('image'));
+       if($hasfile){
+        $file = $request->file('image');
+        $image = Storage::disk('public')->putFile('tenant',$file);                //shortcut of storage facades
+        $url = Storage::disk('public')->url($image);
+        $tenant->image = $url;
+        } else {
+            $tenant->image = '';
+        }
 
        $res = $tenant->save();
        return response()->json([
@@ -198,50 +196,49 @@ class TenantController extends Controller
         ]);
 }
 
+public function UpdateAssignStatus(Request $request)
+{
+    $data = Tenants::where('tenant_Id',$request->tenant_Id)->first();
 
+    $data->assign_status = $request->assign_status;
+    $data->save();
+    return response()->json([
+    'status' => true,
+    'massage' => 'Status updated successfully',
+   ]);
+}
 
-    public function UpdateTenant(Request $request,$id)
-    {
-        $data = Tenants::find($id);
+public function UpdateTenant(Request $request)
+{
+    $data = Tenants::find($request->id);
 
-       $data->name = $request->input("name");
-       $data->mobile = $request->input("mobile");
-       $data->address = $request->input("address");
-       $data->password = $request->input("password");
-       $data->nid = $request->input("nid");
-    //    $data->image = $request->input("image");
-    if($request->hasfile('image')){
-        $destination = 'uploads/tenants/'.$data->image;
-        if(File::exists($destination))
-        {
-            File::delete($destination);
-        }
-
-        $file = $request->file('image');
-        $filename = time() . '.' . $request->image->extension();
-        $file->move('uploads/tenants/' , $filename);
-        $data->image = $filename;
-    }
-    else{
-
-        $data->image='';
-    }
-
-
-       $data->update();
-
-       return response()->json([
-        'status' => true,
-        'massage' => 'Tenant updated successfully',
-       ]);
+   $data->name = $request->input("name") ?? $data->name;
+   $data->mobile = $request->input("mobile") ?? $data->mobile;
+   $data->address = $request->input("address") ?? $data->address;
+   $data->password = $request->input("password") ?? $data->password;
+   $data->nid = $request->input("nid") ?? $data->nid;
+   $data->email = $request->input("email") ?? $data->email;
+   $data->assign_status = $request->input("assign_status") ?? $data->assign_status;
+   $hasfile=($request->hasfile('image'));
+   if($hasfile){
+    $file = $request->file('image');
+    $image = Storage::disk('public')->putFile('tenant',$file);                //shortcut of storage facades
+    $url = Storage::disk('public')->url($image);
+    $data->image = $url;
+    } else {
+        $data->image = $data->image;
     }
 
-
+   $data->save();
+   return response()->json([
+    'status' => true,
+    'massage' => 'Tenant updated successfully',
+   ]);
+}
     public function DeleteTenant($id)
     {
         $data = Tenants::find($id);
         $data->delete();
-
 
         return response()->json([
             'status' => true,

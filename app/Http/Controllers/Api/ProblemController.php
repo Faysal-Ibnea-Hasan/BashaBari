@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+//=================================================Import Models===============================
 use App\Models\Buildings;
 use App\Models\Flats;
 use App\Models\Tenants;
 use App\Models\Problems;
 
-use Illuminate\Http\Request;
 
 class ProblemController extends Controller
 {
@@ -19,8 +20,8 @@ class ProblemController extends Controller
             'data' => $data
         ]);
     }
-    public function GetProblemByTenantId($tenant_Id){
-        $data = Problems::where('tenant_Id',$tenant_Id)->get();
+    public function GetProblemByTenantId(Request $request){
+        $data = Problems::where('tenant_Id',$request->tenant_Id)->get();
         return response()->Json([
             'status' => true,
             'massage' => 'Data founded',
@@ -29,12 +30,12 @@ class ProblemController extends Controller
     }
     public function CreateProblem(Request $request){
         $data = new Problems();
-        $data->building_Id = $request->building_Id;
-        $data->flat_Id = $request->flat_Id;
-        $data->tenant_Id = $request->tenant_Id;
-        $data->title = $request->title;
-        $data->description = $request->description;
-        $data->date = $request->date;
+        $data->building_Id = $request->building_Id ?? "";
+        $data->flat_Id = $request->flat_Id ?? "";
+        $data->tenant_Id = $request->tenant_Id ?? "";
+        $data->title = $request->title ?? "";
+        $data->description = $request->description ?? "";
+        $data->date = $request->date ?? "";
         $data->status = $request->status ?? 'Unsolved';
 
         $data->save();
@@ -44,8 +45,8 @@ class ProblemController extends Controller
         ]);
     }
 
-    public function UpdateProblem(Request $request,$id){
-        $data = Problems::find($id);
+    public function UpdateProblem(Request $request){
+        $data = Problems::find($request->id);
 
         $data->building_Id = $request->input('building_Id');
         $data->flat_Id = $request->input('flat_Id');
@@ -55,7 +56,7 @@ class ProblemController extends Controller
         $data->date = $request->input('date');
         $data->status = $request->input('status') ?? 'Unsolved';
 
-        $data->update();
+        $data->save();
 
         return response()->json([
             'status' => true,
@@ -63,13 +64,13 @@ class ProblemController extends Controller
         ]);
 
     }
-    public function UpdateProblemStatus(Request $request,$id){
-        $data = Problems::find($id);
+    public function UpdateProblemStatus(Request $request){
+        $data = Problems::find($request->id);
 
 
         $data->status = $request->input('status') ?? 'Unsolved';
 
-        $data->update();
+        $data->save();
 
         return response()->json([
             'status' => true,

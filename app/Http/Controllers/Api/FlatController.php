@@ -2,165 +2,102 @@
 
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
+// ========================================Import Models ====================================
 use App\Models\Flats;
 use App\Models\Buildings;
+// ========================================Import Helpers ====================================
 use App\Helpers\Helper;
+// ========================================Import Supports ====================================
 use Illuminate\Support\Facades\File;
-
-
+use Illuminate\Support\Facades\Storage;
 
 class FlatController extends Controller
 {
     public function GetFlatList($id=null)
     {
-        // $data = $id?Owners::find($id):Owners::with('Buildings');
         $data = $id?Flats::find($id):Flats::all();
         return response()->json([
             'status' => true,
             'massage' => 'success',
             'data' => $data
         ]);
+    }
 
-    }
-    public function GetFlatListByFlatID($flat_Id){
-        $data = Flats::where('flat_Id','=',$flat_Id)->get();
+    public function GetFlatListByFlatID(Request $request){
+        $data = Flats::where('flat_Id','=',$request->flat_Id)->get();
         return response()->json([
             'status' => true,
             'massage' => 'success',
             'data' => $data
         ]);
     }
-    public function GetAvailableFlat($owner_Id){
-        $data = Flats::where('status','Available')->where('owner_Id','=',$owner_Id)->get();
+
+    public function GetAvailableFlat(Request $request){
+        $data = Flats::where('status','Available')->where('owner_Id','=',$request->owner_Id)->get();
         return response()->json([
             'status' => true,
             'massage' => 'success',
             'data' => $data
         ]);
     }
-    public function GetFlatListByBuildingID($building_Id){
-        $data = Flats::where('building_Id','=',$building_Id)->get();
+
+    public function GetFlatListByBuildingID(Request $request){
+        $data = Flats::where('building_Id','=',$request->building_Id)->get();
         return response()->json([
             'status' => true,
             'massage' => 'success',
             'data' => $data
         ]);
     }
-    public function GetFlatListByBuilding(Request $request,$building_Id)
+
+    public function GetFlatListByBuilding(Request $request)
     {
         $status = $request->status;
-        $data = Flats::where('status','=',$status)->where('building_id','=', $building_Id)->get();
-        $dataAll = Flats::where('building_id','=', $building_Id)->get();
+        $data = Flats::where('status','=',$status)->where('building_id','=', $request->building_Id)->get();
+        $dataAll = Flats::where('building_id','=', $request->building_Id)->get();
 
-        if ($status)
-        {
+        if ($status){
             return response()->json([
             'status' => true,
             'massage' => 'Found Success',
             'data' => $data
             ]);
-        }
-
-        else if(!$status){
+        } else if(!$status) {
             return response()->json([
                 'status' => true,
                 'massage' => 'Not Found',
                 'data' => $dataAll
-                ]);
+            ]);
         }
-
     }
-    public function GetFlatImage($id)
-    {
-
-        // $data = $id?Owners::find($id):Owners::with('Buildings');
-
-        $data = Flats::where('id',$id)->get();
-
-        // $myarray = json_decode($data, true);
-
-        return response()->json([
-            'status' => true,
-            'massage' => 'success',
-            'data' => $data
-        ]);
-
-    }
-    // public function GetDetails(Request $request)
-    // {
-    //     $data = Flats::where('id', $request->id)->get();
-    //     return view('details-flat',compact('data'));
-    // }
-
-    // public function GetDetails($id)
-    // {
-    //     $data = Flats::find($id);
-    //     return response()->json(
-    //          $data
-    //     );
-    // }
-
-
     public function CreateFlat(Request $request)
     {
-    //    $this->validate($request,[
-
-
-    //      'image' => 'required',
-    //      'image.*' => 'image|mimes:jpg,jpeg,png,gif,svg|max:5120'
-    //    ]);
-
-
-
        $flat = new Flats();
-    //    $data = Flats::Where('building_Id','=',$request->building_Id)->get();
-    // //    $data1 = Flats::Where('building_Id','=',$request->building_Id);
-    //    if($data){
-    //     $data1 = Flats::Where('unit_name','=',$request->unit_name)->get();
-    //     if($data1 && $data) {
 
-    //         return response()->json([
-    //             "status"=> false,
-    //             "massage"=> "Already Exists",
-
-    //             ]
-
-    //         );
-    //     }
-    //    }
-       $flat->owner_Id = $request->owner_Id;
-       $flat->unit_name = $request->unit_name;
-       $flat->building_Id = $request->building_Id;
-       $flat->floor = $request->floor;
-       $flat->area = $request->area;
+       $flat->owner_Id = $request->owner_Id ?? "";
+       $flat->unit_name = $request->unit_name ?? "";
+       $flat->building_Id = $request->building_Id ?? "";
+       $flat->floor = $request->floor ?? "";
+       $flat->area = $request->area ?? "";
        $flat->flat_Id = Helper::Generator(new Flats,'flat_Id',4,'Flat');
-       $flat->room = $request->room;
-       $flat->washroom = $request->washroom;
-       $flat->balconi = $request->balconi;
-       $flat->rent_value = $request->rent_value;
-       $flat->status = $request->status;
-       if($request->hasfile('image'))
-    {
-        foreach($request->file('image') as $file)
-        {
-
-            // $file = $request->file('image');
-            $filename = time().'_'. $file->extension();
-            $file->move('uploads/flats/' , $filename);
-            $data[] = $filename;
-            // $flat->image = $filename;
-            $flat->image = json_encode($data);
-
-
+       $flat->room = $request->room ?? "";
+       $flat->washroom = $request->washroom ?? "";
+       $flat->balconi = $request->balconi ?? "";
+       $flat->rent_value = $request->rent_value ?? "";
+       $flat->status = $request->status ?? "";
+       $flat->rent_type = $request->rent_type ?? "";
+       $flat->rent_package = $request->rent_package ?? "";
+       $hasfile=($request->hasfile('image'));
+          if($hasfile){
+           $file = $request->file('image');
+           $image = Storage::disk('public')->putFile('flat',$file);                //shortcut of storage facades
+           //dump($image);
+           $url = Storage::disk('public')->url($image);
+           $flat->image = $url;
+        } else {
+       $flat->image = '';
         }
-    }
-
-    else
-    {
-        $flat->image='';
-    }
 
        $res=$flat->save();
        return response()->json([
@@ -169,8 +106,9 @@ class FlatController extends Controller
    ]);
  }
 
- public function UpdateFlatStatus(Request $request,$id){
-    $data = Flats::find($id);
+ public function UpdateFlatStatus(Request $request)
+ {
+    $data = Flats::where('flat_Id',$request->flat_Id)->first();
     $data->status=$request->input('status');
     $data->update();
     return response()->json([
@@ -179,83 +117,44 @@ class FlatController extends Controller
        ]);
  }
 
-    public function UpdateFlat(Request $request,$id)
+    public function UpdateFlat(Request $request)
     {
-        $data = Flats::find($id);
-$inputValue = $request->has(['unit_name','building_Id','floor','area','room','washroom','balconi','rent_value','status']);
-if($inputValue){
-
-    $data->owner_Id=$request->input('owner_Id');
-    $data->unit_name = $request->input('unit_name');
-    $data->building_Id = $request->input('building_Id');
-    $data->floor = $request->input('floor');
-    $data->area = $request->input('area');
-
-    $data->room = $request->input('room');
-    $data->washroom = $request->input('washroom');
-    $data->balconi = $request->input('balconi');
-    $data->rent_value = $request->input('rent_value');
-    $data->status = $request->input('status');
-}
-
-
-   else if ($inputValue === null){
-    $data->unit_name = $data->unit_name;
-    $data->building_Id=$data->building_Id;
-    $data->floor=$data->floor;
-    $data->area=$data->area;
-    $data->room=$data->room;
-    $data->washroom=$data->washroom;
-    $data->balconi=$data->balconi;
-    $data->rent_value=$data->rent_value;
-    $data->status=$data->status;
-}
-
-    // $data->image = $request->input('image');
-        if($request->hasfile('image'))
-        {
-            $destination = 'uploads/flats/'.$data->image;
-            if(File::exists($destination))
-            {
-                File::delete($destination);
-            }
-            foreach($request->file('image') as $file)
-            {
-
-                // $file = $request->file('image');
-                $filename = $file->extension();
-                $file->move('uploads/flats/' , $filename);
-                $datas[] = $filename;
-                // $flat->image = $filename;
-                $data->image = json_encode($datas);
-            }
+        $data = Flats::find($request->id);
+        //dd($data);
+    $data->owner_Id=$request->input('owner_Id') ?? $data->owner_Id;
+    $data->unit_name = $request->input('unit_name') ?? $data->unit_name;
+    $data->building_Id = $request->input('building_Id') ?? $data->building_Id;
+    $data->floor = $request->input('floor') ?? $data->floor;
+    $data->area = $request->input('area') ?? $data->area;
+    $data->room = $request->input('room') ?? $data->room;
+    $data->washroom = $request->input('washroom') ?? $data->washroom;
+    $data->balconi = $request->input('balconi') ?? $data->balconi;
+    $data->rent_value = $request->input('rent_value') ?? $data->rent_value;
+    $data->status = $request->input('status') ?? $data->status;
+    $data->rent_type = $request->input('rent_type') ?? $data->rent_type;
+    $data->rent_package = $request->input('rent_package') ?? $data->rent_package;
+    $hasfile=($request->hasfile('image'));
+          if($hasfile){
+           $file = $request->file('image');
+           $image = Storage::disk('public')->putFile('flat',$file);                //shortcut of storage facades
+           //dump($image);
+           $url = Storage::disk('public')->url($image);
+           $data->image = $url;
+        } else {
+       $data->image = $data->image;
         }
 
-
-        else
-        {
-            $data->image=$data->image;
-        }
-        $data->update();
+        $data->save();
         return response()->json([
             'status' => true,
             'massage' => 'Flat updated successfully',
            ]);
     }
 
-
-
-
-
-
-
-
-
     public function DeleteFlat($id)
     {
         $data = Flats::find($id);
         $data->delete();
-
 
         return response()->json([
             'status' => true,

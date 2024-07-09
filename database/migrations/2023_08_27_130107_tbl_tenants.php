@@ -21,8 +21,10 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('password')->nullable();
             $table->string('image')->nullable();
+            $table->string('email')->nullable();
             $table->string('nid')->nullable();
             $table->string('tenant_Id')->nullable();
+            $table->string('assign_status')->nullable();
 
 
 

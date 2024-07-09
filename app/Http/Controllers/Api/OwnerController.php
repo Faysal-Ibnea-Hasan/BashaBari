@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
+//=============================================Import Models==========================================
 use App\Models\Owners;
 use App\Models\Buildings;
 use App\Models\Flats;
+//=============================================Import Supports========================================
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class OwnerController extends Controller
 {
     public function GetOwnerList($id=null)
     {
-        // $data = $id?Owners::find($id):Owners::with('Buildings');
         $data = $id?Owners::find($id):Owners::all();
 
         return response()->json([
@@ -22,20 +23,19 @@ class OwnerController extends Controller
             'data' => $data
         ]);
     }
+
     public function CheckOwner(Request $request){
         $mobile = $request->mobile;
         $password = $request->password;
         $data = Owners::Where('mobile','=',$mobile)->first();
         $data1 = Owners::Where('password','=',$password)->first();
         if($data && $data1){
-
             return response()->json([
                 'status' => true,
                 'massage' => 'Found',
                 'data' => $data
             ]);
-        }
-        else{
+        } else {
             return response()->json([
                 'status' => false,
                 'massage' => 'Not Found',
@@ -43,75 +43,67 @@ class OwnerController extends Controller
             ]);
         }
     }
-    public function GetOwnerImage($image){
-        $path = public_path('uploads/owners/'.$image);
-        return response()->file($path);
-    }
 
-    public function profile_update_owner_mobile(Request $request,$id){ 
-        $data = Owners::find($id);
+    public function profile_update_owner_mobile(Request $request){
+        $data = Owners::find($request->id);
         $data->name = $request->input("name") ?? "";
        $data->mobile = $request->input("mobile") ?? "";
        $data->address = $request->input("address") ?? "";
        $data->password = $request->input("password") ?? "";
        $data->nid = $request->input("nid") ?? "";
-    //    $data->image = $request->input("image");
-    if($request->hasfile('image')){
-        $destination = 'uploads/tenants/'.$data->image;
-        if(File::exists($destination))
-        {
-            File::delete($destination);
-        }
-
-        $file = $request->file('image');
-        $filename = time() . '.' . $request->image->extension();
-        $file->move('uploads/tenants/' , $filename);
-        $data->image = $filename;
-    }
-    else{
-
-        $data->image='';
+       $data->email = $request->input("email") ?? "";
+       $hasfile=($request->hasfile('image'));
+          if($hasfile){
+           $file = $request->file('image');
+           $image = Storage::disk('public')->putFile('owner',$file);
+           $url = Storage::disk('public')->url($image);
+           $data->image = $url;
+    } else {
+       $data->image = $data->image;
     }
 
-
-       $data->update();
-
+       $data->save();
        return response()->json([
         'status' => true,
         'massage' => 'Owner updated successfully',
         'data' => $data
        ]);
-
     }
-
-
-
 
     public function CreateOwner(Request $request)
     {
        $owner = new Owners();
 
-       $owner->name = $request->name;
-       $owner->mobile = $request->mobile;
-       $owner->address = $request->address;
-       $owner->password = $request->password;
-       $owner->nid = $request->nid;
-    //    $owner->building_Id = $request->building_Id;
+       $owner->name = $request->name ?? "";
+       $owner->mobile = $request->mobile ?? "";
+       $owner->address = $request->address ?? "";
+       $owner->password = $request->password ?? "";
+       $owner->nid = $request->nid ?? "";
+       $owner->email = $request->email ?? "";
+       $hasfile=($request->hasfile('image'));
+    //    dump($hasfile);
+       if($hasfile){
+        $file = $request->file('image');
+        // dump($file);
+        // dump($file->getClientMimeType());
+        // dump($file->getClientOriginalExtension());
+        $image = Storage::disk('public')->putFile('image',$file);                //shortcut of storage facades
+        //dump($image);
+        $url = Storage::disk('public')->url($image);
+        //dump($url);
+        //dump($owner->image = $url);
+        $owner->image = $url;
 
-    //    $owner->image = $request->image;
-    if($request->hasfile('image'))
-    {
-       $file = $request->file('image');
-       $filename = time() . '.' . $file->extension();
-       $file->move('uploads/owners/' , $filename);
-       $owner->image = $filename;
-    }
-    else
-    {
+       // dump(Storage::disk('public')->putFile('image',$file));
 
-       $owner->image = '';
-    }
+    //    $name1 = $file->storeAs('image',$file->guessExtension());
+    //    $name2=Storage::disk('public')->putFileAs('image',$file,$file->guessExtension());
 
+    //    dump(Storage::url($name1));
+    //    dump(Storage::disk('public')->url($name2));
+} else {
+    $owner->image = '';
+}
        $res = $owner->save();
        return response()->json([
         'status' => true,
@@ -119,44 +111,25 @@ class OwnerController extends Controller
    ]);
     }
 
-
-    public function UpdateOwner(Request $request,$id)
+    public function UpdateOwner(Request $request)
     {
-        $data = Owners::find($id);
+        $data = Owners::find($request->id);
 
-       $data->name = $request->input("name");
-       $data->mobile = $request->input("mobile");
-       $data->address = $request->input("address");
-       $data->password = $request->input("password");
-       if($request->input("nid")){
-
-            $data->nid = $request->input("nid");
-        }
-        else{
-            $data->nid = $data->nid;
-        }
-
-    //    $data->image = $request->input("image");
-    if($request->hasfile('image'))
-    {
-        $destination = 'uploads/owners/'.$data->image;
-        if(File::exists($destination))
-        {
-            File::delete($destination);
-        }
-
+       $data->name = $request->input("name") ?? $data->name;
+       $data->mobile = $request->input("mobile") ?? $data->mobile;
+       $data->address = $request->input("address") ?? $data->address;
+       $data->password = $request->input("password") ?? $data->password;
+       $data->email = $request->input("email") ?? $data->email;
+       $data->nid = $request->input("nid") ?? $data->nid;
+       $hasfile=($request->hasfile('image'));
+       if($hasfile){
         $file = $request->file('image');
-        $filename = time() . '.' . $request->image->extension();
-        $file->move('uploads/owners/' , $filename);
-        $data->image = $filename;
-    }
-    else
-    {
-
-        $data->image=$data->image;
-    }
-
-
+        $image = Storage::disk('public')->putFile('owner',$file);
+        $url = Storage::disk('public')->url($image);
+        $data->image = $url;
+ } else {
+    $data->image = $data->image;
+ }
        $data->update();
        return response()->json([
         'status' => true,
@@ -164,12 +137,10 @@ class OwnerController extends Controller
        ]);
     }
 
-
     public function DeleteOwner($id)
     {
         $data = Owners::find($id);
         $data->delete();
-
 
         return response()->json([
             'status' => true,

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
+// ========================================Import Models ====================================
 use App\Models\Owners;
 use App\Models\Tenants;
 use App\Models\Buildings;
@@ -23,7 +23,6 @@ class DashboardController extends Controller
             'totalBuilding' => $totalBuilding,
             'totalFlat' => $totalFlat,
             'totalOwner' => $totalOwner,
-
         ]);
     }
 
