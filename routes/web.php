@@ -26,19 +26,7 @@ use App\Http\Controllers\NoticeController;
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-Route::controller(DashboardController::class)->group(function () {
-
-    Route::get('/','GetDashboard')->name('dashboard.get');
-});
 
 //===================================OWNER CONTROLLER================================================
 Route::controller(OwnerController::class)->group(function () {
@@ -150,6 +138,6 @@ Route::controller(NoticeController::class)->group(function () {
     Route::put('Notice/Updated/{id}','UpdateNotice')->name('notice.form.update.put');
 });
 
-});
+
 
 require __DIR__.'/auth.php';

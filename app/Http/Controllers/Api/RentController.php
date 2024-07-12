@@ -31,7 +31,7 @@ class RentController extends Controller
     }
 
     public function GetRentListByTenant(Request $request){
-        $data = Rents::where('tenant_Id','=',$request->tenant_Id)->get();
+        $data = Rents::where('tenant_Id','=',$request->tenant_Id)->first();
         return response()->json([
             'status' => true,
             'massage' => 'success',

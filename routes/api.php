@@ -57,7 +57,7 @@ Route::controller(OwnerController::class)->group(function () {
     // =============================Flat API========================================
 Route::controller(FlatController::class)->group(function () {
     Route::get('Api/Flat/Table/{id?}', 'GetFlatList');
-    Route::get('Api/Flat/TableByFlatID', 'GetFlatListByFlatID');
+    Route::post('Api/Flat/TableByFlatID', 'GetFlatListByFlatID');
     Route::get('Api/Flat/Available', 'GetAvailableFlat');
     Route::post('Api/Flat/TableByBuildingID', 'GetFlatListByBuildingID');
     Route::post('Api/Flat/TableByBuilding', 'GetFlatListByBuilding');
